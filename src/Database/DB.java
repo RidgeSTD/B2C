@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.logging.Logger;
-
+import model.*;
 public class DB {
 	public static void main(String[] args){
-		
+		//for testing
 	}
 	private DB(){
 		try{
@@ -63,4 +63,23 @@ public class DB {
 	private Connection connection;
 //	private PreparedStatement preparedStatement;
 	private Logger logger;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
