@@ -1,34 +1,34 @@
 package model;
 import model.*;
 public class NBProductComment {
-	private NBUser user;
-	private NBProduct product;
+	private int userID;
+	private int productID;
 	private int level;
 	private String title;
 	private String content;
 	/**
-	 * @return the user
+	 * @return the userID
 	 */
-	protected NBUser getUser() {
-		return user;
+	protected int getUserID() {
+		return userID;
 	}
 	/**
-	 * @param user the user to set
+	 * @param userID the userID to set
 	 */
-	protected void setUser(NBUser user) {
-		this.user = user;
+	protected void setUserID(int userID) {
+		this.userID = userID;
 	}
 	/**
-	 * @return the product
+	 * @return the productID
 	 */
-	protected NBProduct getProduct() {
-		return product;
+	protected int getProductID() {
+		return productID;
 	}
 	/**
-	 * @param product the product to set
+	 * @param productID the productID to set
 	 */
-	protected void setProduct(NBProduct product) {
-		this.product = product;
+	protected void setProductID(int productID) {
+		this.productID = productID;
 	}
 	/**
 	 * @return the level
@@ -66,11 +66,11 @@ public class NBProductComment {
 	protected void setContent(String content) {
 		this.content = content;
 	}
-	public NBProductComment(NBUser user, NBProduct product, int level,
-			String title, String content) {
+	public NBProductComment(int userID, int productID, int level, String title,
+			String content) {
 		super();
-		this.user = user;
-		this.product = product;
+		this.userID = userID;
+		this.productID = productID;
 		this.level = level;
 		this.title = title;
 		this.content = content;

@@ -2,8 +2,13 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Logger;
+
 import model.*;
 public class DB {
 	public static void main(String[] args){
@@ -13,8 +18,8 @@ public class DB {
 		try{
 			//TODO connect to m
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/B2C.NB","root","");
-			Statement s=con.createStatement();
+			connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/B2C.NB","root","");
+//			Statement s=con.createStatement();
 			logger.info("connection set");
 //			 ResultSet rsTables = connection.getMetaData().getTables(null, null, "student", null);  
 //             if(rsTables.next()){  
@@ -65,9 +70,42 @@ public class DB {
 	private Logger logger;
 	
 	
-	
-	
-	
+	private NBAdmin validateAdmin(String username,String password){
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from NBAdmin where username=? and password=?");
+			p.setString(1, username);
+			p.setString(2, password);
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBAdmin admin=new NBAdmin(rs.getString(1),rs.getString(2));
+				logger.info("return admin");
+				return admin;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logger.severe("get admin failed");
+		return null;
+		
+	}
+	private ArrayList<NBCategory> getNBCategorys(){
+		ArrayList list=new ArrayList<NBCategory>(100);
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from NBCategory;");
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBCategory tempCateory=new NBCategory(rs.getInt(1),rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+				list.add(tempCateory);				
+			}
+			for (NBCategory temp)
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
 	
 	
 	

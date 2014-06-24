@@ -1,8 +1,9 @@
 package model;
 
 public class NBCategory {
+	private int ID;
 	private String name;
-	private NBCategory father;
+	private int fatherID;
 	private String description;
 	private String imagePath;
 	/**
@@ -16,18 +17,6 @@ public class NBCategory {
 	 */
 	protected void setName(String name) {
 		this.name = name;
-	}
-	/**
-	 * @return the father
-	 */
-	protected NBCategory getFather() {
-		return father;
-	}
-	/**
-	 * @param father the father to set
-	 */
-	protected void setFather(NBCategory father) {
-		this.father = father;
 	}
 	/**
 	 * @return the description
@@ -53,13 +42,15 @@ public class NBCategory {
 	protected void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	public NBCategory(String name, NBCategory father, String description,
+	public NBCategory(int id,String name, int  fatherID, String description,
 			String imagePath) {
 		super();
+		this.ID=id;
 		this.name = name;
-		this.father = father;
+		this.fatherID = fatherID;
 		this.description = description;
 		this.imagePath = imagePath;
+//		this.father=null;
 	}
 	
 	

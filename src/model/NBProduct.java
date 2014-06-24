@@ -1,24 +1,25 @@
 package model;
 import model.*;
 public class NBProduct {
-	private NBCategory category;
+	private int categoryID;
 	private int id;
 	private String name;
 	private String descrition;
 	private String imagePath;
 	private double discount;
 	private int numberLeft;
+	
 	/**
-	 * @return the category
+	 * @return the categoryID
 	 */
-	protected NBCategory getCategory() {
-		return category;
+	protected int getCategoryID() {
+		return categoryID;
 	}
 	/**
-	 * @param category the category to set
+	 * @param categoryID the categoryID to set
 	 */
-	protected void setCategory(NBCategory category) {
-		this.category = category;
+	protected void setCategoryID(int categoryID) {
+		this.categoryID = categoryID;
 	}
 	/**
 	 * @return the id
@@ -92,10 +93,10 @@ public class NBProduct {
 	protected void setNumberLeft(int numberLeft) {
 		this.numberLeft = numberLeft;
 	}
-	public NBProduct(NBCategory category, int id, String name,
+	public NBProduct(int categoryID, int id, String name,
 			String descrition, String imagePath, double discount, int numberLeft) {
 		super();
-		this.category = category;
+		this.categoryID = categoryID;
 		this.id = id;
 		this.name = name;
 		this.descrition = descrition;

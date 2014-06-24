@@ -1,32 +1,38 @@
 package model;
 
 public class NBOrderInfo {
-	private NBOrder order;
-	private NBProduct product ;
+	private int orderID;
+	private int productID ;
 	private int number;
-	/**
-	 * @return the order
-	 */
-	protected NBOrder getOrder() {
-		return order;
+	public NBOrderInfo(int order, int product, int number) {
+		super();
+		this.orderID = order;
+		this.productID = product;
+		this.number = number;
 	}
 	/**
-	 * @param order the order to set
+	 * @return the orderID
 	 */
-	protected void setOrder(NBOrder order) {
-		this.order = order;
+	protected int getOrderID() {
+		return orderID;
 	}
 	/**
-	 * @return the product
+	 * @param orderID the orderID to set
 	 */
-	protected NBProduct getProduct() {
-		return product;
+	protected void setOrderID(int orderID) {
+		this.orderID = orderID;
 	}
 	/**
-	 * @param product the product to set
+	 * @return the productID
 	 */
-	protected void setProduct(NBProduct product) {
-		this.product = product;
+	protected int getProductID() {
+		return productID;
+	}
+	/**
+	 * @param productID the productID to set
+	 */
+	protected void setProductID(int productID) {
+		this.productID = productID;
 	}
 	/**
 	 * @return the number
@@ -38,12 +44,6 @@ public class NBOrderInfo {
 	 * @param number the number to set
 	 */
 	protected void setNumber(int number) {
-		this.number = number;
-	}
-	public NBOrderInfo(NBOrder order, NBProduct product, int number) {
-		super();
-		this.order = order;
-		this.product = product;
 		this.number = number;
 	}
 	
