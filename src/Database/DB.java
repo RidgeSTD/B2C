@@ -1,5 +1,6 @@
 package Database;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -150,4 +151,46 @@ public class DB {
 		return null;
 
 	}
+	public NBOrder getNBOrder(int orderID){
+		return null;
+	}
+	
+	public ArrayList<NBOrder> getNBOrdersByUserID(){
+		return null;
+	}
+	public ArrayList<NBOrderInfo> getNBOrderInfosByNBOrderID(int orderID){
+		return null;
+	}
+	public ArrayList<NBOrderInfo> getNBOrderInfosByNBProductID(int productID){
+		return null;
+	}
+	public NBProduct getNBProductByID(int id){
+		return null;
+	}
+	public ArrayList<NBProduct> getNBProductsByName(String name){
+		return null;
+	}
+	public ArrayList<NBProductComment> getNBProductCommentsByProductID(int productID){
+		return null;
+	}
+	public ArrayList<NBProductComment> getNBProductCommentsByUserID(int productID){
+		return null;
+	}
+	public NBUser getUserByID(int id){
+		return null;
+	}
+	public NBUser getUserByEmail(String email){
+		return null;
+	}
+	public ArrayList<NBUserAddress> getNBUserAddressesByUserID(int userID){
+		return null;
+	}
+	public ArrayList<NBUserAddress> getNBUserAddressesByUserIDIncludingInactive(int userID){
+		return null;
+	}
+	public NBVIPCategory getNBVCategoryByNBUserID(int userID){
+		return null;
+	}
+	
+	
 }
