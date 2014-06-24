@@ -1,22 +1,10 @@
 package model;
 import model.*;
 public class NBVIPCategory {
-	private NBUser user;
+	private int  userID;
 	private String levelName;
 	private int leastScore;
 	private double scorePercentage;
-	/**
-	 * @return the user
-	 */
-	protected NBUser getUser() {
-		return user;
-	}
-	/**
-	 * @param user the user to set
-	 */
-	protected void setUser(NBUser user) {
-		this.user = user;
-	}
 	/**
 	 * @return the levelName
 	 */
@@ -51,14 +39,6 @@ public class NBVIPCategory {
 	 * @param scorePercentage the scorePercentage to set
 	 */
 	protected void setScorePercentage(double scorePercentage) {
-		this.scorePercentage = scorePercentage;
-	}
-	public NBVIPCategory(NBUser user, String levelName, int leastScore,
-			double scorePercentage) {
-		super();
-		this.user = user;
-		this.levelName = levelName;
-		this.leastScore = leastScore;
 		this.scorePercentage = scorePercentage;
 	}
 	

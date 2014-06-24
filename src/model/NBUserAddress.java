@@ -1,7 +1,7 @@
 package model;
 import model.*;
 public class NBUserAddress {
-	private NBUser user;
+	private int  userID;
 	private	String receiverName;
 	private String address;
 	private String postCode;
@@ -9,22 +9,22 @@ public class NBUserAddress {
 	private String mobilePhone;
 	private int isActive;
 	/**
-	 * @return the user
-	 */
-	protected NBUser getUser() {
-		return user;
-	}
-	/**
-	 * @param user the user to set
-	 */
-	protected void setUser(NBUser user) {
-		this.user = user;
-	}
-	/**
 	 * @return the receiverName
 	 */
 	protected String getReceiverName() {
 		return receiverName;
+	}
+	/**
+	 * @return the userID
+	 */
+	protected int getUserID() {
+		return userID;
+	}
+	/**
+	 * @param userID the userID to set
+	 */
+	protected void setUserID(int userID) {
+		this.userID = userID;
 	}
 	/**
 	 * @param receiverName the receiverName to set
@@ -92,10 +92,10 @@ public class NBUserAddress {
 	protected void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
-	public NBUserAddress(NBUser user, String receiverName, String address,
+	public NBUserAddress(int userID, String receiverName, String address,
 			String postCode, String telephone, String mobilePhone, int isActive) {
 		super();
-		this.user = user;
+		this.userID = userID;
 		this.receiverName = receiverName;
 		this.address = address;
 		this.postCode = postCode;

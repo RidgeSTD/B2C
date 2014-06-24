@@ -1,8 +1,9 @@
 package model;
 import model.*;
 public class NBProduct {
-	private int categoryID;
 	private int id;
+	private int categoryID;
+
 	private String name;
 	private String descrition;
 	private String imagePath;
@@ -93,7 +94,7 @@ public class NBProduct {
 	protected void setNumberLeft(int numberLeft) {
 		this.numberLeft = numberLeft;
 	}
-	public NBProduct(int categoryID, int id, String name,
+	public NBProduct(int id,int categoryID,  String name,
 			String descrition, String imagePath, double discount, int numberLeft) {
 		super();
 		this.categoryID = categoryID;
