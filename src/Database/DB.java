@@ -81,6 +81,7 @@ public class DB {
 				logger.info("return admin");
 				return admin;
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,16 +111,43 @@ public class DB {
 	}
 
 
+	public ArrayList<NBOrder> getNBOrders(){
+		ArrayList<NBOrder> list=new ArrayList<NBOrder>(1000);
+		Statement s;
+		try {
+			s = connection.createStatement();
+			ResultSet rs = s.executeQuery("select * from NBOrder");
+			while(rs.next()){
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 
+	}
+	public ArrayList<NBOrderInfo> getNBOrderInfos(){
+		return null;
+	}
+	public ArrayList<NBProduct> getNBProducts(){
+		return null;
 
+	}
+	public ArrayList<NBProductComment> getProductComments(){
+		return null;
 
+	}
+	public ArrayList<NBUser> getNBUsers(){
+		return null;
 
+	}
+	public ArrayList <NBUserAddress> getNBUserAddress(){
+		return null;
 
+	}
+	public ArrayList<NBVIPCategory> getVIPCategorys(){
+		return null;
 
-
-
-
-
-
-
+	}
 }
