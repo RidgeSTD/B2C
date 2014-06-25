@@ -11,6 +11,15 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import model.*;
+/**
+ * 数据库操作类
+ * 大家凡是用到数据库的话都这样写：
+ * DB db=DB.getInstance();
+ * db.someMethod();
+
+ * @author 赵国铨
+ *
+ */
 public class DB {
 	public static void main(String[] args){
 		//for testing
@@ -63,7 +72,13 @@ public class DB {
 
 
 	public static DB getInstance(){
-		return db;
+		if(db!=null){
+			return db;
+		}
+		else{
+			db=new DB();
+			return db;
+		}
 	}
 	private static DB db=new DB();
 	private Connection connection;
@@ -346,7 +361,12 @@ public class DB {
 		return null;
 	}
 	public Double getNBOrderPriceByOrderID(Integer orderID){
-		
+		ArrayList<NBOrderInfo> orderInfos=getNBOrderInfosByNBOrderID(orderID);
+		double price=0.0;
+		for(NBOrderInfo o:orderInfos){
+			NBProduct p=getNBProductByID(o.getProductID());
+			price+=p.getDiscount();
+		}
 		return null;
 	}
 	public NBProduct getNBProductByID(Integer id){
@@ -584,12 +604,12 @@ public class DB {
 	
 	
 	/**
-	 * 修改订单信息，只能修改
+	 * 修改订单信息，只能修改state,score,userAddressID
 	 * @author 赵国铨
 	 * 2014年6月25日
-	 * @param orderID
-	 * @param newOrder
-	 * @return
+	 * @param orderID 需要修改的orderID
+	 * @param newOrder 新的order对象
+	 * @return 1成功 0失败
 	 */
 	public Integer updateNBOrder(Integer orderID,NBOrder newOrder){
 		try {
@@ -599,18 +619,12 @@ public class DB {
 			p.setInt(2, newOrder.getScoreGet());
 			p.setInt(3, newOrder.getUserAddressID());
 			p.setInt(4, newOrder.getOrderID());
-			ResultSet rs = p.executeQuery();
-			while(rs.next()){
-				NBOrder tempOrder=new NBOrder(rs.getInt(1), rs.getInt(2),new java.util.Date(rs.getDate(3).getTime()), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7));
-				
-				logger.info("order selected "+tempOrder);
-//				return tempOrder;TODO
-				
-			}
+			p.execute();
+			logger.info("update orderinfo fine :"+newOrder);
 		} catch (SQLException e) {
 		
 			e.printStackTrace();
-			logger.severe("get  order"+orderID+"failed");
+			logger.severe("update order "+newOrder+" failed");
 		}
 		return null;
 	}
