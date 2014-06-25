@@ -84,8 +84,7 @@
 						<%=order.getOrderDate() %>
 					</td>
 					<td>
-						<%-- <%=order.get %> --%>
-						￥30.18
+						<%=order.getPrice() %>
 					</td>
 					<td>
 						<%=order.getScoreGet() %>

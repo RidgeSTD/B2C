@@ -10,6 +10,19 @@ public class NBOrder {
 	private Date orderDate;
 	private int state;
 	private int scoreGet;
+	private double price;
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	/**
 	 * @return the userID
 	 */
@@ -19,25 +32,25 @@ public class NBOrder {
 	/**
 	 * @param userID the userID to set
 	 */
-	protected void setUserID(int userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	/**
 	 * @return the userAddressID
 	 */
-	protected int getUserAddressID() {
+	public  int getUserAddressID() {
 		return userAddressID;
 	}
 	/**
 	 * @param userAddressID the userAddressID to set
 	 */
-	protected void setUserAddressID(int userAddressID) {
+	public  void setUserAddressID(int userAddressID) {
 		this.userAddressID = userAddressID;
 	}
 	/**
 	 * @return the orderID
 	 */
-	public int getOrderID() {
+	public  int getOrderID() {
 		return orderID;
 	}
 	private int userAddressID;
@@ -63,7 +76,7 @@ public class NBOrder {
 		this.scoreGet = scoreGet;
 	}
 	public NBOrder(int orderID, int userID, Date orderDate, int state,
-			int scoreGet, int userAddressID) {
+			int scoreGet, int userAddressID,int price) {
 		super();
 		this.orderID = orderID;
 		this.userID = userID;
@@ -71,6 +84,7 @@ public class NBOrder {
 		this.state = state;
 		this.scoreGet = scoreGet;
 		this.userAddressID = userAddressID;
+		this.price=price;
 	}
 	
 	

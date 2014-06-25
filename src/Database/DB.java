@@ -164,6 +164,9 @@ public class DB {
 	public ArrayList<NBOrderInfo> getNBOrderInfosByNBProductID(Integer productID){
 		return null;
 	}
+	public Double getNBOrderPriceByOrderID(Integer orderID){
+		return null;
+	}
 	public NBProduct getNBProductByID(Integer id){
 		return null;
 	}
