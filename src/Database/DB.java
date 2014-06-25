@@ -131,7 +131,12 @@ public class DB {
 
 	}
 
-
+	/**
+	 * 得到全部订单
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @return 订单的ArrayLIst
+	 */
 	public ArrayList<NBOrder> getNBOrders(){
 		ArrayList<NBOrder> list=new ArrayList<NBOrder>(1000);
 		Statement s;
@@ -139,17 +144,43 @@ public class DB {
 			s = connection.createStatement();
 			ResultSet rs = s.executeQuery("select * from NBOrder");
 			while(rs.next()){
-				
+				NBOrder tempOrder=new NBOrder(rs.getInt(1), rs.getInt(2),new java.util.Date(rs.getDate(3).getTime()), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7));
+				list.add(tempOrder);
+				logger.info("order add "+tempOrder);				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("get all orders failed");
 		}
 		return null;
 
 	}
+	/**
+	 * 获得全部NBOrderInfo
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @return NBOrderInfo 的arrayLIst null为获取失败
+	 */
 	public ArrayList<NBOrderInfo> getNBOrderInfos(){
+		ArrayList<NBOrderInfo> orderInfos=new ArrayList<NBOrderInfo>(400);
+		try {
+			PreparedStatement p = connection.prepareStatement("select * from nborderinfo");
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBOrderInfo temp=new NBOrderInfo(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+				orderInfos.add(temp);
+				logger.info("orderINfo added"+temp);
+			}
+			logger.info("all orderinfo selected");
+			return orderInfos;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("get add orderinfo faild");
+		}
 		return null;
+		
 	}
 	public ArrayList<NBProduct> getNBProducts(){
 		return null;
@@ -171,20 +202,118 @@ public class DB {
 		return null;
 
 	}
+	
+	/**
+	 * 通过orderID得到NBOrder对象
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderID
+	 * @return NBOrder对象
+	 */
 	public NBOrder getNBOrder(Integer orderID){
+	
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from nborder where orderid=?");
+			p.setInt(1, orderID);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				NBOrder tempOrder=new NBOrder(rs.getInt(1), rs.getInt(2),new java.util.Date(rs.getDate(3).getTime()), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7));
+				
+				logger.info("order selected "+tempOrder);
+				return tempOrder;
+			}
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			logger.severe("get  order"+orderID+"failed");
+		}
 		return null;
 	}
 	
+	/**
+	 * 通过email得到用户的全部订单
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param email
+	 * @return 该用户的全部订单
+	 */
 	public ArrayList<NBOrder> getNBOrdersByUserEmail(String email){
+		try {
+			ArrayList<NBOrder> orders=new ArrayList<NBOrder>();
+			NBUser user=getNBUserByEmail(email);
+			PreparedStatement p=connection.prepareStatement("select * from nborder where userID=?");
+			p.setInt(1, user.getId());
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				NBOrder tempOrder=new NBOrder(rs.getInt(1), rs.getInt(2),new java.util.Date(rs.getDate(3).getTime()), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7));
+				orders.add(tempOrder);
+				logger.info("order selected "+tempOrder);
+			}
+			logger.info("all orders belongs to "+user+" was selected");
+			return orders;
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			logger.severe("get this user's orders "+email+"failed");
+		}
 		return null;
 	}
+	
+	/**
+	 * 通过orderID得到全部相关订单信息
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderID int 订单的id
+	 * @return 全部orderID的相关订单信息的arraylist null为失败
+	 */
 	public ArrayList<NBOrderInfo> getNBOrderInfosByNBOrderID(Integer orderID){
+		ArrayList<NBOrderInfo> orderInfos=new ArrayList<NBOrderInfo>(400);
+		try {
+			PreparedStatement p = connection.prepareStatement("select * from nborderinfo where orderid=?");
+			p.setInt(1, orderID);
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBOrderInfo temp=new NBOrderInfo(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+				orderInfos.add(temp);
+				logger.info("orderINfo added"+temp);
+			}
+			logger.info("all orderinfo selected");
+			return orderInfos;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("get "+orderID+"'s orderinfo faild");
+		}
 		return null;
 	}
+	/**
+	 * 得到productID指定的商品的所有订单信息
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param productID
+	 * @return
+	 */
 	public ArrayList<NBOrderInfo> getNBOrderInfosByNBProductID(Integer productID){
+		ArrayList<NBOrderInfo> orderInfos=new ArrayList<NBOrderInfo>(400);
+		try {
+			PreparedStatement p = connection.prepareStatement("select * from nborderinfo where productid=?");
+			p.setInt(1, productID);
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBOrderInfo temp=new NBOrderInfo(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+				orderInfos.add(temp);
+				logger.info("orderINfo added"+temp);
+			}
+			logger.info("all orderinfo selected");
+			return orderInfos;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("get product "+productID+" 's orderinfo faild");
+		}
 		return null;
 	}
 	public Double getNBOrderPriceByOrderID(Integer orderID){
+		
 		return null;
 	}
 	public NBProduct getNBProductByID(Integer id){

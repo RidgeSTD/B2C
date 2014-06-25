@@ -12,7 +12,7 @@ public class NBOrder {
 	private int scoreGet;
 	private double price;
 	private int userAddressID;
-public NBOrder(int orderID, int userID, Date orderDate, int state,
+	public NBOrder(int orderID, int userID, Date orderDate, int state,
 			int scoreGet,  int userAddressID,double price) {
 		super();
 		this.orderID = orderID;
@@ -91,17 +91,7 @@ public void setOrderID(int orderID) {
 	public void setScoreGet(int scoreGet) {
 		this.scoreGet = scoreGet;
 	}
-	public NBOrder(int orderID, int userID, Date orderDate, int state,
-			int scoreGet, int userAddressID,int price) {
-		super();
-		this.orderID = orderID;
-		this.userID = userID;
-		this.orderDate = orderDate;
-		this.state = state;
-		this.scoreGet = scoreGet;
-		this.userAddressID = userAddressID;
-		this.price=price;
-	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
