@@ -108,6 +108,15 @@ public class NBUser {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBUser [id=" + id + ", email=" + email + ", nickname="
+				+ nickname + ", password=" + password + ", score=" + score
+				+ ", level=" + level + ", registerDate=" + registerDate + "]";
+	}
 
 	
 	

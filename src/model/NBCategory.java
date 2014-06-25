@@ -53,6 +53,15 @@ public class NBCategory {
 		this.imagePath = imagePath;
 //		this.father=null;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBCategory [ID=" + ID + ", name=" + name + ", fatherID="
+				+ fatherID + ", description=" + description + ", imagePath="
+				+ imagePath + "]";
+	}
 	
 	
 }

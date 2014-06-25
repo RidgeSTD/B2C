@@ -208,9 +208,36 @@ public class DB {
 		return null;
 		
 	}
-	
+	/**
+	 * 获取email对应用户的所有地址信息
+	 * @author 赵国铨
+	 * @param email email
+	 * @return email对应用户的所有地址信息
+	 */
 	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmail(String email){
+		ArrayList<NBUserAddress> addresses=new ArrayList<NBUserAddress>();
+		try{
+			NBUser user=getNBUserByEmail(email);
+			int userID=user.getId();
+			PreparedStatement p=connection.prepareStatement("select * from nbuseraddress where userID=?");
+			p.setInt(1,userID);
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBUserAddress temp=new NBUserAddress(rs.getInt(1), rs.getInt(2), rs.getString(3)
+						, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				
+				addresses.add(temp);
+				logger.info(temp.toString());
+			}
+			
+			return addresses;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
+		
+		
 	}
 	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmailIncludingInactive(String email){
 		return null;
@@ -289,14 +316,13 @@ public class DB {
 			p.setInt(4, user.getScore());
 			p.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
 			p.execute();
-			logger.info("insert user success"+user.getEmail());
+			logger.info("insert user success"+user);
 			return 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
-		
 	}
 	public Integer insertNBUserAddress(NBUserAddress address){
 		return 0;
@@ -330,6 +356,13 @@ public class DB {
 //	public Integer updateNBProductComment(NBProductComment comment){
 //		return 0;
 //	}
+	/**
+	 * 更新用户信息，nickname和password
+	 * 不需要提供原始 password的方法。
+	 * @param email
+	 * @param newUser
+	 * @return
+	 */
 	public Integer updateNBUser(String email,NBUser newUser){
 		try {
 			PreparedStatement p=connection.prepareStatement("update nbuser "
@@ -338,7 +371,7 @@ public class DB {
 			p.setString(2, newUser.getPassword());
 			p.setString(3, email);
 			p.execute();
-			logger.info("update user success "+newUser.getEmail());
+			logger.info("update user success "+newUser);
 			return 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -346,7 +379,13 @@ public class DB {
 		}
 		return 0;
 	}
-	
+	/**
+	 * 更新用户信息，nickname和password
+	 * @param email
+	 * @param password
+	 * @param newUser
+	 * @return 1,0
+	 */
 	public Integer updateNBUser(String email,String password,NBUser newUser){
 		try {
 			PreparedStatement p=connection.prepareStatement("update nbuser "
@@ -358,7 +397,7 @@ public class DB {
 			p.setString(4, password);
 			
 			p.execute();
-			logger.info("update user success "+newUser.getEmail());
+			logger.info("update user success "+newUser);
 			return 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

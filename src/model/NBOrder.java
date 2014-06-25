@@ -102,6 +102,16 @@ public void setOrderID(int orderID) {
 		this.userAddressID = userAddressID;
 		this.price=price;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBOrder [orderID=" + orderID + ", userID=" + userID
+				+ ", orderDate=" + orderDate + ", state=" + state
+				+ ", scoreGet=" + scoreGet + ", price=" + price
+				+ ", userAddressID=" + userAddressID + "]";
+	}
 	
 	
 	

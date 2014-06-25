@@ -106,5 +106,15 @@ public class NBProduct {
 		this.discount = discount;
 		this.numberLeft = numberLeft;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBProduct [id=" + id + ", categoryID=" + categoryID + ", name="
+				+ name + ", descrition=" + descrition + ", imagePath="
+				+ imagePath + ", discount=" + discount + ", numberLeft="
+				+ numberLeft + "]";
+	}
 	
 }

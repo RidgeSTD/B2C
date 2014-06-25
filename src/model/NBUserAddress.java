@@ -118,5 +118,16 @@ public class NBUserAddress {
 		this.mobilePhone = mobilePhone;
 		this.isActive = isActive;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBUserAddress [userAddressID=" + userAddressID + ", userID="
+				+ userID + ", receiverName=" + receiverName + ", address="
+				+ address + ", postCode=" + postCode + ", telephone="
+				+ telephone + ", mobilePhone=" + mobilePhone + ", isActive="
+				+ isActive + "]";
+	}
 	
 }
