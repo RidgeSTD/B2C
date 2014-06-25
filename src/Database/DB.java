@@ -27,7 +27,7 @@ public class DB {
 //                 logger.info("student table already exsit");  
 //             } else {  
 //            	 Statement s=connection.createStatement();
-//                 s.executeUpdate("create table student (sid int,name text,gender text,age int,classNum int,password text,birthDate date);");
+//                 s.executeUpdate("create table student (sid Integer,name text,gender text,age Integer,classNum Integer,password text,birthDate date);");
 //                 logger.fine("create student success");
 //                 
 //             }  
@@ -37,7 +37,7 @@ public class DB {
 //                 logger.info("admin table already exsit");  
 //             } else {  
 //            	 Statement s=connection.createStatement();
-//                 s.executeUpdate("create table admin (aid int,password text);");
+//                 s.executeUpdate("create table admin (aid Integer,password text);");
 //                 s.executeUpdate("insert into admin values(1,'admin')");
 //                 logger.fine("create admin success");
 //             }  
@@ -47,7 +47,7 @@ public class DB {
 //                 logger.info("score table already exsit");  
 //             } else {  
 //            	 Statement s=connection.createStatement();
-//                 s.executeUpdate("create table score (aid int,className text,score float);");
+//                 s.executeUpdate("create table score (aid Integer,className text,score float);");
 ////                 s.execute("insert into admin values(1,'admin')");
 //                 logger.fine("create socre success");
 //             }  
@@ -151,32 +151,32 @@ public class DB {
 		return null;
 
 	}
-	public NBOrder getNBOrder(int orderID){
+	public NBOrder getNBOrder(Integer orderID){
 		return null;
 	}
 	
 	public ArrayList<NBOrder> getNBOrdersByUserEmail(String email){
 		return null;
 	}
-	public ArrayList<NBOrderInfo> getNBOrderInfosByNBOrderID(int orderID){
+	public ArrayList<NBOrderInfo> getNBOrderInfosByNBOrderID(Integer orderID){
 		return null;
 	}
-	public ArrayList<NBOrderInfo> getNBOrderInfosByNBProductID(int productID){
+	public ArrayList<NBOrderInfo> getNBOrderInfosByNBProductID(Integer productID){
 		return null;
 	}
-	public NBProduct getNBProductByID(int id){
+	public NBProduct getNBProductByID(Integer id){
 		return null;
 	}
 	public ArrayList<NBProduct> getNBProductsByName(String name){
 		return null;
 	}
-	public ArrayList<NBProductComment> getNBProductCommentsByProductID(int productID){
+	public ArrayList<NBProductComment> getNBProductCommentsByProductID(Integer productID){
 		return null;
 	}
-	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(int productID){
+	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(Integer productID){
 		return null;
 	}
-	public NBUser getUserByID(int id){
+	public NBUser getUserByID(Integer id){
 		return null;
 	}
 	public NBUser getUserByEmail(String email){
@@ -197,31 +197,31 @@ public class DB {
 	//insert section
 	// containing insert SQL 
 	
-	public int insertNBAdmin(NBAdmin admin){
+	public Integer insertNBAdmin(NBAdmin admin){
 		return 0;
 	}
-	public int insertNBCategory(NBCategory c){
+	public Integer insertNBCategory(NBCategory c){
 		return 0;
 	}
-	public int insertNBOrder(NBOrder order){
+	public Integer insertNBOrder(NBOrder order){
 		return 0;
 	}
-	public int insertNBOrderInfo(NBOrderInfo orderInfo){
+	public Integer insertNBOrderInfo(NBOrderInfo orderInfo){
 		return 0;
 	}
-	public int insertNBProduct(NBProduct product){
+	public Integer insertNBProduct(NBProduct product){
 		return 0;
 	}
-	public int insertNBProductComment(NBProductComment comment){
+	public Integer insertNBProductComment(NBProductComment comment){
 		return 0;
 	}
-	public int insertNBUser(NBUser user){
+	public Integer insertNBUser(NBUser user){
 		return 0;
 	}
-	public int insertNBUserAddress(NBUserAddress address){
+	public Integer insertNBUserAddress(NBUserAddress address){
 		return 0;
 	}
-	public int insertNBVIPCategory(NBVIPCategory vipCategory){
+	public Integer insertNBVIPCategory(NBVIPCategory vipCategory){
 		return 0;
 	}
 	
@@ -232,31 +232,31 @@ public class DB {
 	
 	//update section
 	//includeing UPDATE SQL
-	public int updateNBAdmin(String username,NBAdmin newAdmin){
+	public Integer updateNBAdmin(String username,NBAdmin newAdmin){
 		return 0;
 	}
-	public int updateNBCategory(int categoryID,NBCategory newCategory){
+	public Integer updateNBCategory(Integer categoryID,NBCategory newCategory){
 		return 0;
 	}
-	public int updateNBOrder(int orderID,NBOrder newOrder){
+	public Integer updateNBOrder(Integer orderID,NBOrder newOrder){
 		return 0;
 	}
-	public int updateNBOrderInfo(int orderID,int productID,NBOrderInfo newOrderInfo){
+	public Integer updateNBOrderInfo(Integer orderID,Integer productID,NBOrderInfo newOrderInfo){
 		return 0;
 	}
-	public int updateNBProduct(int productID,NBProduct newProduct){
+	public Integer updateNBProduct(Integer productID,NBProduct newProduct){
 		return 0;
 	}
-//	public int updateNBProductComment(NBProductComment comment){
+//	public Integer updateNBProductComment(NBProductComment comment){
 //		return 0;
 //	}
-	public int updateNBUser(String email,NBUser newUser){
+	public Integer updateNBUser(String email,NBUser newUser){
 		return 0;
 	}
-	public int updateNBUserAddress(NBUserAddress address){
+	public Integer updateNBUserAddress(NBUserAddress address){
 		return 0;
 	}
-	public int updateNBVIPCategory(NBVIPCategory vipCategory){
+	public Integer updateNBVIPCategory(NBVIPCategory vipCategory){
 		return 0;
 	}
 }
