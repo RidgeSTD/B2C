@@ -2,7 +2,7 @@ package model;
 import model.*;
 public class NBVIPCategory {
 	public NBVIPCategory(){}
-	private int  userID;
+	private int  ID;
 	private String levelName;
 	private int leastScore;
 	private double scorePercentage;

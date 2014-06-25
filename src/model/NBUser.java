@@ -9,6 +9,18 @@ public class NBUser {
 	private String nickname;
 	private String password;
 	private int score;
+	private String level;
+	public NBUser(String email, String nickname, String password, int score,
+			String level, Date registerDate) {
+		super();
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+		this.score = score;
+		this.level = level;
+		this.registerDate = registerDate;
+	}
+
 	private Date registerDate;
 	/**
 	 * @return the email
@@ -70,15 +82,7 @@ public class NBUser {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	public NBUser(String email, String nickname, String password, int score,
-			Date registerDate) {
-		super();
-		this.email = email;
-		this.nickname = nickname;
-		this.password = password;
-		this.score = score;
-		this.registerDate = registerDate;
-	}
+
 	
 	
 }

@@ -8,6 +8,7 @@ public class NBAdmin {
 		this.username = username;
 		this.password = password;
 	}
+	
 	public NBAdmin(){}
 	/**
 	 * @return the username

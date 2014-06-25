@@ -183,8 +183,12 @@ public class DB {
 		return null;
 	}
 	public NBUser getUserByEmail(String email){
+		//remember to set level string
+		//using getNBVIPCategoryByscore
 		return null;
+		
 	}
+	
 	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmail(String email){
 		return null;
 	}
@@ -192,6 +196,9 @@ public class DB {
 		return null;
 	}
 	public NBVIPCategory getNBVCategoryByNBUserEmail(String eamil){
+		return null;
+	}
+	public NBVIPCategory getNBVCategoryByScore(int score){
 		return null;
 	}
 	
@@ -256,10 +263,67 @@ public class DB {
 	public Integer updateNBUser(String email,NBUser newUser){
 		return 0;
 	}
-	public Integer updateNBUserAddress(NBUserAddress address){
+	
+	/**
+	 * 更新用户地址，由于之前没有加主键，所以更新方式是提供旧的address对象和新的address对象。
+	 * @param oldaddress 旧地址
+	 * @param newAddress 新地址
+	 * @return 成功1，失败0
+	 */
+	public Integer updateNBUserAddress(NBUserAddress oldaddress,NBUserAddress newAddress){
 		return 0;
 	}
-	public Integer updateNBVIPCategory(NBVIPCategory vipCategory){
+	
+	/**
+	 * 更新白金卡什么玩意的最低积分等
+	 * @param categoryID 级别id
+	 * @param newVipCategory 新级别
+	 * @return 成功1 失败0
+	 */
+	public Integer updateNBVIPCategoryByID(Integer categoryID,NBVIPCategory newVipCategory){
+		return 0;
+	}
+	
+	/**
+	 * 更新白金卡什么玩意的最低积分等
+	 * @param categoryName 级别名称
+	 * @param newVipCategory 新级别对象
+	 * @return 成功1 失败0
+	 */
+	public Integer updateNBVIPCategoryByName(String categoryName,NBVIPCategory newVipCategory){
+		return 0;
+	}
+	
+	
+	
+	// delete section
+	
+	
+	public int deleteNBAdmin(NBAdmin admin){
+		return 0;
+	}
+	public int deleteNBCategory(NBCategory c){
+		return 0;
+	}
+	public int deleteNBOrder(NBOrder order){
+		return 0;
+	}
+	public int deleteNBOrderInfo(NBOrderInfo orderInfo){
+		return 0;
+	}
+	public int deleteNBProduct(NBProduct product){
+		return 0;
+	}
+	public int deleteNBProductComment(NBProductComment comment){
+		return 0;
+	}
+	public int deleteNBUser(NBUser user){
+		return 0;
+	}
+	public int deleteNBUserAddress(NBUserAddress address){
+		return 0;
+	}
+	public int deleteNBVIPCategory(NBVIPCategory vipCategory){
 		return 0;
 	}
 }
