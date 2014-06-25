@@ -1,6 +1,7 @@
 package model;
 
 public class NBOrderInfo {
+	public NBOrderInfo(){}
 	private int orderID;
 	private int productID ;
 	private int number;

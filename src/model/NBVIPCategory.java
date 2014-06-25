@@ -1,6 +1,7 @@
 package model;
 import model.*;
 public class NBVIPCategory {
+	public NBVIPCategory(){}
 	private int  userID;
 	private String levelName;
 	private int leastScore;

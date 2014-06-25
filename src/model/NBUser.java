@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class NBUser {
+	public NBUser(){}
 
 	private String email;
 	private String nickname;

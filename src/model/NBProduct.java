@@ -1,6 +1,7 @@
 package model;
 import model.*;
 public class NBProduct {
+	public NBProduct(){}
 	private int id;
 	private int categoryID;
 

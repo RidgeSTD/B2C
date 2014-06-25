@@ -1,6 +1,7 @@
 package model;
 
 public class NBCategory {
+	public  NBCategory(){}
 	private int ID;
 	private String name;
 	private int fatherID;

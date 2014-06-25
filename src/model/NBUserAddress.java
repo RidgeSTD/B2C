@@ -1,6 +1,7 @@
 package model;
 import model.*;
 public class NBUserAddress {
+	public NBUserAddress(){}
 	private int userAddressID;
 	/**
 	 * @return the userAddressID

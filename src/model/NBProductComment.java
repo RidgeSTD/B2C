@@ -1,6 +1,7 @@
 package model;
 import model.*;
 public class NBProductComment {
+	public NBProductComment(){}
 	private int userID;
 	private int productID;
 	private int level;

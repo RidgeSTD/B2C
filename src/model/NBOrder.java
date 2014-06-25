@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class NBOrder {
+	public NBOrder(){}
 	private int orderID;
 	private int userID;
 //	private NBUser user;
