@@ -75,9 +75,22 @@ public class DB {
 	 * @param password
 	 * @return 1成功 0失败
 	 */
-	public Interger validataUser(String email,String password){
-		return null;
+	public Integer validataUser(String email,String password){
+		PreparedStatement p;
+		try {
+			p = connection.prepareStatement("select * from nbuser where email=? and password=?");
+			p.setString(1, email);
+			p.setString(2,password);
+			p.execute();
+			logger.info("user " +email+" validated");
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
+	
 	public NBAdmin validateAdmin(String username,String password){
 		try {
 			PreparedStatement p=connection.prepareStatement("select * from NBAdmin where username=? and password=?");
@@ -203,9 +216,38 @@ public class DB {
 		return null;
 	}
 	public NBVIPCategory getNBVCategoryByNBUserEmail(String eamil){
-		return null;
+//		return null;
+		
 	}
 	public NBVIPCategory getNBVCategoryByScore(Integer score){
+		ArrayList<NBVIPCategory> cate=new ArrayList<NBVIPCategory>(20);
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from NBVIPCategory");
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				cate.add(new NBVIPCategory(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4)));
+			}
+			NBVIPCategory selected=cate.get(0);
+			for(NBVIPCategory temp: cate){
+				if(temp.getLeastScore()>new Integer(score)){
+					continue;
+				}
+				else{
+					if(temp.getLeastScore()<selected.getLeastScore()){
+						//select this because it is less
+						selected=temp;
+					}
+					else{
+						//continue
+						continue;
+					}
+				}
+			}
+			return selected;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -233,7 +275,23 @@ public class DB {
 		return 0;
 	}
 	public Integer insertNBUser(NBUser user){
+		try {
+			PreparedStatement p =connection.prepareStatement("insert into NBUser values"
+					+ "(null,?,?,?,?,?)");
+			p.setString(1, user.getEmail());
+			p.setString(2,user.getNickname());
+			p.setString(3, user.getPassword());
+			p.setInt(4, user.getScore());
+			p.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+			p.execute();
+			logger.info("insert user success"+user.getEmail());
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
+		
 	}
 	public Integer insertNBUserAddress(NBUserAddress address){
 		return 0;

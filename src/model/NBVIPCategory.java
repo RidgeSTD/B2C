@@ -12,6 +12,14 @@ public class NBVIPCategory {
 	public String getLevelName() {
 		return levelName;
 	}
+	public NBVIPCategory(int iD, String levelName, int leastScore,
+			double scorePercentage) {
+		super();
+		ID = iD;
+		this.levelName = levelName;
+		this.leastScore = leastScore;
+		this.scorePercentage = scorePercentage;
+	}
 	/**
 	 * @param levelName the levelName to set
 	 */

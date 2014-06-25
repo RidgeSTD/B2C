@@ -106,9 +106,10 @@ public class NBUserAddress {
 	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
-	public NBUserAddress(int userID, String receiverName, String address,
+	public NBUserAddress(int userAddressID,int userID, String receiverName, String address,
 			String postCode, String telephone, String mobilePhone, int isActive) {
 		super();
+		this.userAddressID=userAddressID;
 		this.userID = userID;
 		this.receiverName = receiverName;
 		this.address = address;

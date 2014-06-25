@@ -4,15 +4,17 @@ import java.util.Date;
 
 public class NBUser {
 	public NBUser(){}
-
+	private int id;
 	private String email;
 	private String nickname;
 	private String password;
 	private int score;
-	private String level;
-	public NBUser(String email, String nickname, String password, int score,
-			String level, Date registerDate) {
+	private String level;//TODO
+	
+	public NBUser(int id,String email, String nickname, String password, int score,
+			Date registerDate,String level ) {
 		super();
+		this.id=id;
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
@@ -22,6 +24,30 @@ public class NBUser {
 	}
 
 	private Date registerDate;
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	/**
+	 * @return the level
+	 */
+	public String getLevel() {
+		return level;
+	}
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(String level) {
+		this.level = level;
+	}
 	/**
 	 * @return the email
 	 */

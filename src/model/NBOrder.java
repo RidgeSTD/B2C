@@ -11,6 +11,22 @@ public class NBOrder {
 	private int state;
 	private int scoreGet;
 	private double price;
+	private int userAddressID;
+public NBOrder(int orderID, int userID, Date orderDate, int state,
+			int scoreGet,  int userAddressID,double price) {
+		super();
+		this.orderID = orderID;
+		this.userID = userID;
+		this.orderDate = orderDate;
+		this.state = state;
+		this.scoreGet = scoreGet;
+		
+		this.userAddressID = userAddressID;
+		this.price = price;
+		//TODO set price!!!
+		
+	}
+//	private int userAddressID;
 	/**
 	 * @return the price
 	 */
@@ -53,7 +69,7 @@ public class NBOrder {
 	public  int getOrderID() {
 		return orderID;
 	}
-	private int userAddressID;
+	
 public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
