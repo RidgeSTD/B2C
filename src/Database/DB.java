@@ -225,8 +225,8 @@ public class DB {
 			while (rs.next()){
 				NBUserAddress temp=new NBUserAddress(rs.getInt(1), rs.getInt(2), rs.getString(3)
 						, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
-				
-				addresses.add(temp);
+				if(temp.getIsActive()==1)
+					addresses.add(temp);
 				logger.info(temp.toString());
 			}
 			
@@ -239,7 +239,35 @@ public class DB {
 		
 		
 	}
+	
+	/**
+	 * 通过email获取用户地址 ，包括已经删除的地址
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param email
+	 * @return 用户地址的ArrayList
+	 * 
+	 */
 	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmailIncludingInactive(String email){
+		ArrayList<NBUserAddress> addresses=new ArrayList<NBUserAddress>();
+		try{
+			NBUser user=getNBUserByEmail(email);
+			int userID=user.getId();
+			PreparedStatement p=connection.prepareStatement("select * from nbuseraddress where userID=?");
+			p.setInt(1,userID);
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBUserAddress temp=new NBUserAddress(rs.getInt(1), rs.getInt(2), rs.getString(3)
+						, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				addresses.add(temp);
+				logger.info(temp.toString());
+			}
+			
+			return addresses;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 	public NBVIPCategory getNBVIPCategoryByNBUserEmail(String email){
@@ -324,7 +352,32 @@ public class DB {
 		}
 		return 0;
 	}
+	
+	/**
+	 * 插入用户地址
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param address NBUserAddress对象  useraddressID ,isactive无需提供，任意值即可
+	 * @return 1,0
+	 */
 	public Integer insertNBUserAddress(NBUserAddress address){
+		try {
+			PreparedStatement p =connection.prepareStatement("insert into nbuserAddress values"
+					+ "(null,?,?,?,?,?,1)");
+			p.setInt(1, address.getUserID());
+			p.setString(2, address.getReceiverName());
+			p.setString(3,address.getAddress());
+			p.setString(4, address.getPostCode());
+			p.setString(5, address.getTelephone());
+			p.setString(6, address.getMobilePhone());
+			//is active
+			p.execute();
+			logger.info("insert useraddress success"+address.toString());
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	public Integer insertNBVIPCategory(NBVIPCategory vipCategory){
@@ -353,9 +406,7 @@ public class DB {
 	public Integer updateNBProduct(Integer productID,NBProduct newProduct){
 		return 0;
 	}
-//	public Integer updateNBProductComment(NBProductComment comment){
-//		return 0;
-//	}
+
 	/**
 	 * 更新用户信息，nickname和password
 	 * 不需要提供原始 password的方法。
@@ -414,6 +465,50 @@ public class DB {
 	 * @return 成功1，失败0
 	 */
 	public Integer updateNBUserAddress(NBUserAddress oldaddress,NBUserAddress newAddress){
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbuseraddress "
+					+ "set receiverName=?,address=?,postcode=?,telephone=?,mobilephone=? "
+					+ " where useraddressID=?");
+			p.setString(1, newAddress.getReceiverName());
+			p.setString(2, newAddress.getAddress());
+			p.setString(3, newAddress.getPostCode());
+			p.setString(4, newAddress.getTelephone());
+			p.setString(5, newAddress.getMobilePhone());
+			p.setInt(6, oldaddress.getUserAddressID());
+			p.execute();
+			logger.info("update address success "+newAddress);
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	/**
+	 * 更新用户地址，由于之后有加主键，所以更新方式是提供userAddressID和新的address对象。
+	 * @param userAddressID 旧地址id
+	 * @param newAddress 新地址
+	 * @return 成功1，失败0
+	 */
+	public Integer updateNBUserAddress(int userAddressID,NBUserAddress newAddress){
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbuseraddress "
+					+ "set receiverName=?,address=?,postcode=?,telephone=?,mobilephone=? "
+					+ " where useraddressID=?");
+			p.setString(1, newAddress.getReceiverName());
+			p.setString(2, newAddress.getAddress());
+			p.setString(3, newAddress.getPostCode());
+			p.setString(4, newAddress.getTelephone());
+			p.setString(5, newAddress.getMobilePhone());
+			p.setInt(6, userAddressID);
+			p.execute();
+			logger.info("update address success "+newAddress);
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	
@@ -464,7 +559,50 @@ public class DB {
 	public Integer deleteNBUser(NBUser user){
 		return 0;
 	}
+	/**
+	 * 通过提供原来的对象删除用户送货地址
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param address 希望删除的地址对象
+	 * @return 1成功 0失败
+	 */
 	public Integer deleteNBUserAddress(NBUserAddress address){
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbuseraddress "
+					+ "set isActive=? "
+					+ " where useraddressID=?");
+			p.setInt(1,0);
+			p.setInt(2, address.getUserAddressID());
+			p.execute();
+			logger.info("delete address success "+address);
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	/**
+	 * 通过提供原来的addressID删除用户送货地址
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param address 希望删除的地址对象
+	 * @return 1成功 0失败
+	 */
+	public Integer deleteNBUserAddress(int userAddressID){
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbuseraddress "
+					+ "set isActive=? "
+					+ " where useraddressID=?");
+			p.setInt(1,0);
+			p.setInt(2, userAddressID);
+			p.execute();
+			logger.info("delete address success ,userAddressid="+userAddressID);
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	public Integer deleteNBVIPCategory(NBVIPCategory vipCategory){

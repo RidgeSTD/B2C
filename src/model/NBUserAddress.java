@@ -6,13 +6,13 @@ public class NBUserAddress {
 	/**
 	 * @return the userAddressID
 	 */
-	protected int getUserAddressID() {
+	public int getUserAddressID() {
 		return userAddressID;
 	}
 	/**
 	 * @param userAddressID the userAddressID to set
 	 */
-	protected void setUserAddressID(int userAddressID) {
+	public void setUserAddressID(int userAddressID) {
 		this.userAddressID = userAddressID;
 	}
 	private int  userID;
