@@ -1,0 +1,7 @@
+Script started on Tue Jun 24 09:24:51 2014
+[?1034hbash-3.2$ l[Kshow_file()
+> s[Kthis
+bash: syntax error near unexpected token `this'
+bash-3.2$ show_file() this[K[K[K[K[K;
+bash: syntax error near unexpected token `;'
+bash-3.2$ 
