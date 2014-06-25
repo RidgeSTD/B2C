@@ -360,14 +360,23 @@ public class DB {
 		}
 		return null;
 	}
+	
+	//TODO
+	/**
+	 * 计算订单价格
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderID
+	 * @return 订单价格
+	 */
 	public Double getNBOrderPriceByOrderID(Integer orderID){
 		ArrayList<NBOrderInfo> orderInfos=getNBOrderInfosByNBOrderID(orderID);
 		double price=0.0;
 		for(NBOrderInfo o:orderInfos){
 			NBProduct p=getNBProductByID(o.getProductID());
-			price+=p.getDiscount();
+			price+=p.getDiscount()*p.getPrice()*o.getNumber();
 		}
-		return null;
+		return price;
 	}
 	public NBProduct getNBProductByID(Integer id){
 		return null;
@@ -381,6 +390,13 @@ public class DB {
 	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(Integer productID){
 		return null;
 	}
+	/**
+	 * 通过ID得到NBUser对象
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param id
+	 * @return
+	 */
 	public NBUser getNBUserByID(Integer id){
 		PreparedStatement p;
 		try {
@@ -391,8 +407,9 @@ public class DB {
 			ResultSet rs=p.executeQuery();
 			rs.next();
 			NBUser user=new NBUser(id, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), new java.util.Date(rs.getDate(6).getTime()), null);
+			//!!!setlevel!!!
 			user.setLevel(getNBVIPCategoryByNBUserEmail(user.getEmail()).getLevelName());
-			logger.info("user:"+user+"selected");
+			logger.info("user:"+user+"selected,level wrote");
 			return user;
 			
 		} catch (SQLException e) {
@@ -403,9 +420,35 @@ public class DB {
 		return null;
 		
 	}
+	/**
+	 * 通过email得到User对象
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param email
+	 * @return
+	 */
 	public NBUser getNBUserByEmail(String email){
 		//remember to set level string
 		//using getNBVIPCategoryByscore
+		PreparedStatement p;
+		try {
+//			p=connection.prepareStatement("select * from nbvipcategory where ")
+			p = connection.prepareStatement("select * from nbuser where"
+					+ "email=?");
+			p.setString(1, email);
+			ResultSet rs=p.executeQuery();
+			rs.next();
+			NBUser user=new NBUser(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), new java.util.Date(rs.getDate(6).getTime()), null);
+			//!!!setlevel!!!
+			user.setLevel(getNBVIPCategoryByNBUserEmail(email).getLevelName());
+			logger.info("user:"+user+"selected,level wrote");
+			return user;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("user :"+email+"is not selected,failed");
+		}
 		return null;
 		
 	}

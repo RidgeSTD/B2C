@@ -8,6 +8,7 @@ public class NBProduct {
 	private String name;
 	private String descrition;
 	private String imagePath;
+	private double price;
 	private double discount;
 	private int numberLeft;
 	
@@ -16,6 +17,18 @@ public class NBProduct {
 	 */
 	public int getCategoryID() {
 		return categoryID;
+	}
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	/**
 	 * @param categoryID the categoryID to set
@@ -95,26 +108,19 @@ public class NBProduct {
 	public void setNumberLeft(int numberLeft) {
 		this.numberLeft = numberLeft;
 	}
-	public NBProduct(int id,int categoryID,  String name,
-			String descrition, String imagePath, double discount, int numberLeft) {
+
+	public NBProduct(int id, int categoryID, String name, String descrition,
+			String imagePath, double price, double discount, int numberLeft) {
 		super();
-		this.categoryID = categoryID;
 		this.id = id;
+		this.categoryID = categoryID;
 		this.name = name;
 		this.descrition = descrition;
 		this.imagePath = imagePath;
+		this.price = price;
 		this.discount = discount;
 		this.numberLeft = numberLeft;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "NBProduct [id=" + id + ", categoryID=" + categoryID + ", name="
-				+ name + ", descrition=" + descrition + ", imagePath="
-				+ imagePath + ", discount=" + discount + ", numberLeft="
-				+ numberLeft + "]";
-	}
+	
 	
 }
