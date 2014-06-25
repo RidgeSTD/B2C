@@ -8,37 +8,37 @@ public class NBVIPCategory {
 	/**
 	 * @return the levelName
 	 */
-	protected String getLevelName() {
+	public String getLevelName() {
 		return levelName;
 	}
 	/**
 	 * @param levelName the levelName to set
 	 */
-	protected void setLevelName(String levelName) {
+	public void setLevelName(String levelName) {
 		this.levelName = levelName;
 	}
 	/**
 	 * @return the leastScore
 	 */
-	protected int getLeastScore() {
+	public int getLeastScore() {
 		return leastScore;
 	}
 	/**
 	 * @param leastScore the leastScore to set
 	 */
-	protected void setLeastScore(int leastScore) {
+	public void setLeastScore(int leastScore) {
 		this.leastScore = leastScore;
 	}
 	/**
 	 * @return the scorePercentage
 	 */
-	protected double getScorePercentage() {
+	public double getScorePercentage() {
 		return scorePercentage;
 	}
 	/**
 	 * @param scorePercentage the scorePercentage to set
 	 */
-	protected void setScorePercentage(double scorePercentage) {
+	public void setScorePercentage(double scorePercentage) {
 		this.scorePercentage = scorePercentage;
 	}
 	

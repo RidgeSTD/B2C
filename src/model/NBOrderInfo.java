@@ -13,37 +13,37 @@ public class NBOrderInfo {
 	/**
 	 * @return the orderID
 	 */
-	protected int getOrderID() {
+	public int getOrderID() {
 		return orderID;
 	}
 	/**
 	 * @param orderID the orderID to set
 	 */
-	protected void setOrderID(int orderID) {
+	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
 	/**
 	 * @return the productID
 	 */
-	protected int getProductID() {
+	public int getProductID() {
 		return productID;
 	}
 	/**
 	 * @param productID the productID to set
 	 */
-	protected void setProductID(int productID) {
+	public void setProductID(int productID) {
 		this.productID = productID;
 	}
 	/**
 	 * @return the number
 	 */
-	protected int getNumber() {
+	public int getNumber() {
 		return number;
 	}
 	/**
 	 * @param number the number to set
 	 */
-	protected void setNumber(int number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 	

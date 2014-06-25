@@ -9,61 +9,61 @@ public class NBProductComment {
 	/**
 	 * @return the userID
 	 */
-	protected int getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 	/**
 	 * @param userID the userID to set
 	 */
-	protected void setUserID(int userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	/**
 	 * @return the productID
 	 */
-	protected int getProductID() {
+	public int getProductID() {
 		return productID;
 	}
 	/**
 	 * @param productID the productID to set
 	 */
-	protected void setProductID(int productID) {
+	public void setProductID(int productID) {
 		this.productID = productID;
 	}
 	/**
 	 * @return the level
 	 */
-	protected int getLevel() {
+	public int getLevel() {
 		return level;
 	}
 	/**
 	 * @param level the level to set
 	 */
-	protected void setLevel(int level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
 	/**
 	 * @return the title
 	 */
-	protected String getTitle() {
+	public String getTitle() {
 		return title;
 	}
 	/**
 	 * @param title the title to set
 	 */
-	protected void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 	/**
 	 * @return the content
 	 */
-	protected String getContent() {
+	public String getContent() {
 		return content;
 	}
 	/**
 	 * @param content the content to set
 	 */
-	protected void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 	public NBProductComment(int userID, int productID, int level, String title,

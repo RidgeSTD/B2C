@@ -11,25 +11,25 @@ public class NBAdmin {
 	/**
 	 * @return the username
 	 */
-	protected String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 	/**
 	 * @param username the username to set
 	 */
-	protected void setUsername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	/**
 	 * @return the password
 	 */
-	protected String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	/**
 	 * @param password the password to set
 	 */
-	protected void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	

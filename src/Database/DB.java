@@ -71,7 +71,7 @@ public class DB {
 	private Logger logger;
 
 
-	private NBAdmin validateAdmin(String username,String password){
+	public NBAdmin validateAdmin(String username,String password){
 		try {
 			PreparedStatement p=connection.prepareStatement("select * from NBAdmin where username=? and password=?");
 			p.setString(1, username);
@@ -91,7 +91,7 @@ public class DB {
 		return null;
 
 	}
-	private ArrayList<NBCategory> getNBCategorys(){
+	public ArrayList<NBCategory> getNBCategorys(){
 		ArrayList<NBCategory> list=new ArrayList<NBCategory>(100);
 		try {
 			PreparedStatement p=connection.prepareStatement("select * from NBCategory;");
@@ -155,7 +155,7 @@ public class DB {
 		return null;
 	}
 	
-	public ArrayList<NBOrder> getNBOrdersByUserID(){
+	public ArrayList<NBOrder> getNBOrdersByUserEmail(String email){
 		return null;
 	}
 	public ArrayList<NBOrderInfo> getNBOrderInfosByNBOrderID(int orderID){
@@ -173,7 +173,7 @@ public class DB {
 	public ArrayList<NBProductComment> getNBProductCommentsByProductID(int productID){
 		return null;
 	}
-	public ArrayList<NBProductComment> getNBProductCommentsByUserID(int productID){
+	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(int productID){
 		return null;
 	}
 	public NBUser getUserByID(int id){
@@ -182,13 +182,13 @@ public class DB {
 	public NBUser getUserByEmail(String email){
 		return null;
 	}
-	public ArrayList<NBUserAddress> getNBUserAddressesByUserID(int userID){
+	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmail(String email){
 		return null;
 	}
-	public ArrayList<NBUserAddress> getNBUserAddressesByUserIDIncludingInactive(int userID){
+	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmailIncludingInactive(String email){
 		return null;
 	}
-	public NBVIPCategory getNBVCategoryByNBUserID(int userID){
+	public NBVIPCategory getNBVCategoryByNBUserEmail(String eamil){
 		return null;
 	}
 	

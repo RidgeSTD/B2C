@@ -12,61 +12,61 @@ public class NBUser {
 	/**
 	 * @return the email
 	 */
-	protected String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 	/**
 	 * @param email the email to set
 	 */
-	protected void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	/**
 	 * @return the nickname
 	 */
-	protected String getNickname() {
+	public String getNickname() {
 		return nickname;
 	}
 	/**
 	 * @param nickname the nickname to set
 	 */
-	protected void setNickname(String nickname) {
+	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 	/**
 	 * @return the password
 	 */
-	protected String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	/**
 	 * @param password the password to set
 	 */
-	protected void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	/**
 	 * @return the score
 	 */
-	protected int getScore() {
+	public int getScore() {
 		return score;
 	}
 	/**
 	 * @param score the score to set
 	 */
-	protected void setScore(int score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 	/**
 	 * @return the registerDate
 	 */
-	protected Date getRegisterDate() {
+	public Date getRegisterDate() {
 		return registerDate;
 	}
 	/**
 	 * @param registerDate the registerDate to set
 	 */
-	protected void setRegisterDate(Date registerDate) {
+	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
 	public NBUser(String email, String nickname, String password, int score,

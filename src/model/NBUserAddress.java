@@ -11,85 +11,85 @@ public class NBUserAddress {
 	/**
 	 * @return the receiverName
 	 */
-	protected String getReceiverName() {
+	public String getReceiverName() {
 		return receiverName;
 	}
 	/**
 	 * @return the userID
 	 */
-	protected int getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 	/**
 	 * @param userID the userID to set
 	 */
-	protected void setUserID(int userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	/**
 	 * @param receiverName the receiverName to set
 	 */
-	protected void setReceiverName(String receiverName) {
+	public void setReceiverName(String receiverName) {
 		this.receiverName = receiverName;
 	}
 	/**
 	 * @return the address
 	 */
-	protected String getAddress() {
+	public String getAddress() {
 		return address;
 	}
 	/**
 	 * @param address the address to set
 	 */
-	protected void setAddress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	/**
 	 * @return the postCode
 	 */
-	protected String getPostCode() {
+	public String getPostCode() {
 		return postCode;
 	}
 	/**
 	 * @param postCode the postCode to set
 	 */
-	protected void setPostCode(String postCode) {
+	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 	/**
 	 * @return the telephone
 	 */
-	protected String getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 	/**
 	 * @param telephone the telephone to set
 	 */
-	protected void setTelephone(String telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	/**
 	 * @return the mobilePhone
 	 */
-	protected String getMobilePhone() {
+	public String getMobilePhone() {
 		return mobilePhone;
 	}
 	/**
 	 * @param mobilePhone the mobilePhone to set
 	 */
-	protected void setMobilePhone(String mobilePhone) {
+	public void setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
 	}
 	/**
 	 * @return the isActive
 	 */
-	protected int getIsActive() {
+	public int getIsActive() {
 		return isActive;
 	}
 	/**
 	 * @param isActive the isActive to set
 	 */
-	protected void setIsActive(int isActive) {
+	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
 	public NBUserAddress(int userID, String receiverName, String address,

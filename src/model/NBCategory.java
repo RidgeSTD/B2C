@@ -9,37 +9,37 @@ public class NBCategory {
 	/**
 	 * @return the name
 	 */
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 	/**
 	 * @param name the name to set
 	 */
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	/**
 	 * @return the description
 	 */
-	protected String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 	/**
 	 * @param description the description to set
 	 */
-	protected void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	/**
 	 * @return the imagePath
 	 */
-	protected String getImagePath() {
+	public String getImagePath() {
 		return imagePath;
 	}
 	/**
 	 * @param imagePath the imagePath to set
 	 */
-	protected void setImagePath(String imagePath) {
+	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
 	public NBCategory(int id,String name, int  fatherID, String description,

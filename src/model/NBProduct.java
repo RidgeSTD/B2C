@@ -13,85 +13,85 @@ public class NBProduct {
 	/**
 	 * @return the categoryID
 	 */
-	protected int getCategoryID() {
+	public int getCategoryID() {
 		return categoryID;
 	}
 	/**
 	 * @param categoryID the categoryID to set
 	 */
-	protected void setCategoryID(int categoryID) {
+	public void setCategoryID(int categoryID) {
 		this.categoryID = categoryID;
 	}
 	/**
 	 * @return the id
 	 */
-	protected int getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	protected void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**
 	 * @return the name
 	 */
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 	/**
 	 * @param name the name to set
 	 */
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	/**
 	 * @return the descrition
 	 */
-	protected String getDescrition() {
+	public String getDescrition() {
 		return descrition;
 	}
 	/**
 	 * @param descrition the descrition to set
 	 */
-	protected void setDescrition(String descrition) {
+	public void setDescrition(String descrition) {
 		this.descrition = descrition;
 	}
 	/**
 	 * @return the imagePath
 	 */
-	protected String getImagePath() {
+	public String getImagePath() {
 		return imagePath;
 	}
 	/**
 	 * @param imagePath the imagePath to set
 	 */
-	protected void setImagePath(String imagePath) {
+	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
 	/**
 	 * @return the discount
 	 */
-	protected double getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 	/**
 	 * @param discount the discount to set
 	 */
-	protected void setDiscount(double discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 	/**
 	 * @return the numberLeft
 	 */
-	protected int getNumberLeft() {
+	public int getNumberLeft() {
 		return numberLeft;
 	}
 	/**
 	 * @param numberLeft the numberLeft to set
 	 */
-	protected void setNumberLeft(int numberLeft) {
+	public void setNumberLeft(int numberLeft) {
 		this.numberLeft = numberLeft;
 	}
 	public NBProduct(int id,int categoryID,  String name,

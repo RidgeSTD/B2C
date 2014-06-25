@@ -10,25 +10,25 @@ public class NBOrder {
 	private int state;
 	private int scoreGet;
 	private int userAddressID;
-protected void setOrderID(int orderID) {
+public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
-	protected Date getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
-	protected void setOrderDate(Date orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	protected int getState() {
+	public int getState() {
 		return state;
 	}
-	protected void setState(int state) {
+	public void setState(int state) {
 		this.state = state;
 	}
-	protected int getScoreGet() {
+	public int getScoreGet() {
 		return scoreGet;
 	}
-	protected void setScoreGet(int scoreGet) {
+	public void setScoreGet(int scoreGet) {
 		this.scoreGet = scoreGet;
 	}
 	public NBOrder(int orderID, int userID, Date orderDate, int state,
