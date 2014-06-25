@@ -10,6 +10,36 @@ public class NBOrder {
 	private Date orderDate;
 	private int state;
 	private int scoreGet;
+	/**
+	 * @return the userID
+	 */
+	protected int getUserID() {
+		return userID;
+	}
+	/**
+	 * @param userID the userID to set
+	 */
+	protected void setUserID(int userID) {
+		this.userID = userID;
+	}
+	/**
+	 * @return the userAddressID
+	 */
+	protected int getUserAddressID() {
+		return userAddressID;
+	}
+	/**
+	 * @param userAddressID the userAddressID to set
+	 */
+	protected void setUserAddressID(int userAddressID) {
+		this.userAddressID = userAddressID;
+	}
+	/**
+	 * @return the orderID
+	 */
+	protected int getOrderID() {
+		return orderID;
+	}
 	private int userAddressID;
 public void setOrderID(int orderID) {
 		this.orderID = orderID;
