@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page import="java.util.*" %>
+<%@page import="java.util.*, model.*, Database.*" %>
 <html>
 <head>
 <title>BC2商城</title>
@@ -72,21 +72,27 @@ document.form1.webUserEntity.phone="";
 					</tr>
 				</thead>
 				<tbody>
+				<%
+				DB db = DB.getInstance();
+				
+				/* ArrayList<NBOrder> orderList = session.getAttribute("orderList_hwl"); */
+				for (NBOrder order : orderList){
+					NBUser user = db.getUserByID(order.getUserID());
+					Date orderDate = order.getOrderDate();
+					String stateString = "已支付";
+					if (order.getState()==0){
+					stateString = "未支付";
+				%>
 				  <tr>
-            		<td>1483728</td>
-					<td>wangjx123@163.com</td>
-					<td>2007-10-01&nbsp;10:25:04</td>
-					<td>已支付</td>
+            		<td><%=order.getUserID() %></td>
+					<td><%=user.getEmail() %></td>
+					<td><%=orderDate.getYear()%>-<%=orderDate.getMonth()%>-<%=orderDate.getDate()%>&nbsp;<%=orderDate.getHours() %>:<%orderDate.getMinutes() %>:<%orderDate.getSeconds() %></td>
+					<td><%=stateString %></td>
 					<td><a href="order_info.html"><img src="../image/xq.gif" alt="详情" class="picture"></a></td>
           		  </tr>
-				  <tr>
-            		<td>1483729</td>
-					<td>wangjx123@163.com</td>
-					<td>2007-10-12&nbsp;16:02:24</td>
-					<td>已支付</td>
-					<td><a href="order_info.html"><img src="../image/xq.gif" alt="详情" class="picture"></a></td>
-          		  </tr>
-					
+				<%
+				} 
+				%>
 				 </tbody>
             </table>
 			</form> 

@@ -81,7 +81,7 @@ public class Trade_Query_serv extends HttpServlet {
 				orderList.remove(order);
 			}
 		}
-		session.setAttribute("orderList", orderList);
+		session.setAttribute("orderList_hwl", orderList);
 		response.sendRedirect("/B2C/web/html/order_list.html");
 	}
 
