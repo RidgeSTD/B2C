@@ -260,6 +260,39 @@ public class DB {
 	}
 	
 	/**
+	 * 得到某用户的在末段时间的所有订单
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param email 用户email
+	 * @param startDate 开始时间
+	 * @param endDate 结束时间
+	 * @return ordre的ArrayList null 为失败
+	 */
+	public ArrayList<NBOrder> getNBOrdersByUserEmailAndDateRange(String email,java.util.Date startDate,java.util.Date endDate){
+		try {
+			ArrayList<NBOrder> orders=new ArrayList<NBOrder>();
+			NBUser user=getNBUserByEmail(email);
+			PreparedStatement p=connection.prepareStatement("select * from nborder where userID=?");
+			p.setInt(1, user.getId());
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				NBOrder tempOrder=new NBOrder(rs.getInt(1), rs.getInt(2),new java.util.Date(rs.getDate(3).getTime()), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7));
+				if(tempOrder.getOrderDate().after(startDate)&&tempOrder.getOrderDate().before(endDate));
+					orders.add(tempOrder);
+					
+				logger.info("order selected "+tempOrder);
+			}
+			logger.info("all orders belongs to "+user+" in time range was selected");
+			return orders;
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			logger.severe("get this user's orders "+email+"failed");
+		}
+		return null;
+	}
+	
+	/**
 	 * 通过orderID得到全部相关订单信息
 	 * @author 赵国铨
 	 * 2014年6月25日
@@ -291,7 +324,7 @@ public class DB {
 	 * @author 赵国铨
 	 * 2014年6月25日
 	 * @param productID
-	 * @return
+	 * @return productID指定的商品的所有订单信息
 	 */
 	public ArrayList<NBOrderInfo> getNBOrderInfosByNBProductID(Integer productID){
 		ArrayList<NBOrderInfo> orderInfos=new ArrayList<NBOrderInfo>(400);
@@ -454,8 +487,30 @@ public class DB {
 	public Integer insertNBOrder(NBOrder order){
 		return 0;
 	}
+	
+	/**
+	 * 插入orderInfo
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderInfo 要插入的对象
+	 * @return
+	 */
 	public Integer insertNBOrderInfo(NBOrderInfo orderInfo){
-		return 0;
+		try {
+			PreparedStatement p = connection.prepareStatement("insert into nborderinfo values(?,?,?)");
+			p.setInt(1,orderInfo.getOrderID());
+			p.setInt(2,orderInfo.getProductID());
+			p.setInt(4, orderInfo.getNumber());
+			p.execute();
+			
+			logger.info(" orderinfo inserted:"+orderInfo);
+			return 1;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("insert "+orderInfo+"faild");
+		}
+		return null;
 	}
 	public Integer insertNBProduct(NBProduct product){
 		return 0;
@@ -526,11 +581,94 @@ public class DB {
 	public Integer updateNBCategory(Integer categoryID,NBCategory newCategory){
 		return 0;
 	}
+	
+	
+	/**
+	 * 修改订单信息，只能修改
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderID
+	 * @param newOrder
+	 * @return
+	 */
 	public Integer updateNBOrder(Integer orderID,NBOrder newOrder){
-		return 0;
+		try {
+			PreparedStatement p=connection.prepareStatement("update nborder "
+					+ " set state=? ,scoreGet=?,userAddressID=?,where orderid=?");
+			p.setInt(1, newOrder.getState());
+			p.setInt(2, newOrder.getScoreGet());
+			p.setInt(3, newOrder.getUserAddressID());
+			p.setInt(4, newOrder.getOrderID());
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				NBOrder tempOrder=new NBOrder(rs.getInt(1), rs.getInt(2),new java.util.Date(rs.getDate(3).getTime()), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7));
+				
+				logger.info("order selected "+tempOrder);
+//				return tempOrder;TODO
+				
+			}
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			logger.severe("get  order"+orderID+"failed");
+		}
+		return null;
 	}
+	
+	/**
+	 * 更新NBOrderInfo，其实我觉得主要是更新数量，productID没什么改的需求
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderID 对应的order
+	 * @param productID 对应的product
+	 * @param newOrderInfo 新的OrderInfo对象
+	 * @return 1成功更新   0失败
+	 */
 	public Integer updateNBOrderInfo(Integer orderID,Integer productID,NBOrderInfo newOrderInfo){
-		return 0;
+		try {
+			
+			PreparedStatement p = connection.prepareStatement("update nborderinfo set productID=?,number=? where orderID=? and productID=?");
+			p.setInt(1, newOrderInfo.getProductID());
+			p.setInt(2, newOrderInfo.getNumber());
+			p.setInt(3, orderID);
+			p.setInt(4,productID);
+			p.execute();
+			
+			logger.info(" orderinfo updated:"+newOrderInfo);
+			return 1;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("update "+newOrderInfo+"faild");
+		}
+		return null;
+	}
+	/**
+	 * 只更改order和product确定的订单的数量
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderID
+	 * @param productID
+	 * @param newNum 希望更新的数量
+	 * @return 1成功更新   0失败
+	 */
+	public Integer updateNBOrderInfo(Integer orderID,Integer productID,int newNumber){
+		try {
+			
+			PreparedStatement p = connection.prepareStatement("update nborderinfo set number=? where orderID=? and productID=?");
+			p.setInt(2, newNumber);
+			p.setInt(3, orderID);
+			p.setInt(4,productID);
+			p.execute();
+			
+			logger.info(" orderinfo updated:orderid: "+orderID+"  producctid:"+productID);
+			return 1;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("update faild");
+		}
+		return null;
 	}
 	public Integer updateNBProduct(Integer productID,NBProduct newProduct){
 		return 0;
@@ -676,8 +814,28 @@ public class DB {
 	public Integer deleteNBOrder(NBOrder order){
 		return 0;
 	}
+	/**
+	 * 删除Orderinfo信息，由参数决定删哪个
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param orderInfo 要删这个orderInfo
+	 * @return 1成功 0失败
+	 */
 	public Integer deleteNBOrderInfo(NBOrderInfo orderInfo){
-		return 0;
+		try {
+			
+			PreparedStatement p = connection.prepareStatement("delete from nborderinfo where orderID=? and productID=?");
+			p.setInt(3, orderInfo.getOrderID());
+			p.setInt(4,orderInfo.getProductID());
+			p.execute();
+			logger.info(" delete orderinfo: success"+orderInfo);
+			return 1;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("delete orderinfo"+orderInfo+" faild");
+		}
+		return null;
 	}
 	public Integer deleteNBProduct(NBProduct product){
 		return 0;
@@ -729,8 +887,8 @@ public class DB {
 			logger.info("delete address success ,userAddressid="+userAddressID);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("delete this userAdderess failed "+userAddressID);
 		}
 		return 0;
 	}
