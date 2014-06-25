@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import Database.DB;
 /**
  * 鉴于文澜提的查询太麻烦问题，这里提出了新的解决方案，Ordre，orderInfo，user，userAddress全部在这里封装。
  * 只需要提供orderID即可完成工作。
@@ -73,7 +74,11 @@ public class NBOrderWrap {
 	 * @param orderID
 	 */
 	public NBOrderWrap(int orderID){
-		
+		DB db=DB.getInstance();
+		this.order=db.getNBOrder(orderID);
+		this.orderInfo=db.getNBOrderInfosByNBOrderID(orderID);
+		this.user=db.getNBUserByID(order.getUserID());
+		this.address=db.getNBUserAddressByID(order.getUserAddressID());
 	}
 	
 }

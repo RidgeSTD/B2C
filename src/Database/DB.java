@@ -382,7 +382,26 @@ public class DB {
 		return null;
 	}
 	public NBUser getNBUserByID(Integer id){
+		PreparedStatement p;
+		try {
+//			p=connection.prepareStatement("select * from nbvipcategory where ")
+			p = connection.prepareStatement("select * from nbuser where"
+					+ "id=?");
+			p.setInt(1, id);
+			ResultSet rs=p.executeQuery();
+			rs.next();
+			NBUser user=new NBUser(id, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), new java.util.Date(rs.getDate(6).getTime()), null);
+			user.setLevel(getNBVIPCategoryByNBUserEmail(user.getEmail()).getLevelName());
+			logger.info("user:"+user+"selected");
+			return user;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("user :"+id+"is not selected,failed");
+		}
 		return null;
+		
 	}
 	public NBUser getNBUserByEmail(String email){
 		//remember to set level string
@@ -452,6 +471,35 @@ public class DB {
 		}
 		return null;
 	}
+	/**
+	 * 通过userAddressID得到address 之前忘了加了
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param addressID
+	 * @return NBUserAddress对象
+	 */
+	public NBUserAddress getNBUserAddressByID(int addressID){
+		
+		try{
+			
+			PreparedStatement p=connection.prepareStatement(""
+					+ "select * from nbuseraddress where userAddressID=?");
+			p.setInt(1,addressID);
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBUserAddress temp=new NBUserAddress(rs.getInt(1), rs.getInt(2), rs.getString(3)
+						, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				
+				logger.info(temp.toString());
+				return temp;
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public NBVIPCategory getNBVIPCategoryByNBUserEmail(String email){
 //		return null;
 		NBUser user=getNBUserByEmail(email);
