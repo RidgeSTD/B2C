@@ -3,11 +3,7 @@
   <display-name>B2C-hwl</display-name>
   <servlet>
     <servlet-name>TradeQuery</servlet-name>
-    <servlet-class>edu.winlandiano.TradeQuery</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>Credit_Query_serv</servlet-name>
-    <servlet-class>edu.winlandiano.Credit_Query_serv</servlet-class>
+    <servlet-class>edu.winlandiano.TradeQuery_serv</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>login</servlet-name>
@@ -25,10 +21,6 @@
     <url-pattern>/servlet/TradeQuery</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Credit_Query_serv</servlet-name>
-    <url-pattern>/servlet/Credit_Query_serv</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>login</servlet-name>
     <url-pattern>/servlet/login</url-pattern>
   </servlet-mapping>
@@ -38,6 +30,6 @@
   </servlet-mapping>
   
     <welcome-file-list>
-        <welcome-file>web/html/home_nologin.html</welcome-file>
+        <welcome-file>web/html/home.html</welcome-file>
     </welcome-file-list>
 </web-app>

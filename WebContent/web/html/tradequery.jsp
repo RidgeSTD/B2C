@@ -52,7 +52,7 @@
 <div id="sendnote">
  <div id="sendnotehead"><strong>历史交易查询</strong></div>
  <div id="sendnotecontent">
-   <form action="/servlet/TradeQuery" method="post">
+   <form action="servlet/TradeQuery" method="post">
     <table id="tradequery">
      <tr>
        <th>请选择起始时间:&nbsp;</th>
