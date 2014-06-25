@@ -69,8 +69,15 @@ public class DB {
 	private Connection connection;
 //	private PreparedStatement preparedStatement;
 	private Logger logger;
-
-
+	/**
+	 * 验证用户
+	 * @param email 用户email
+	 * @param password
+	 * @return 1成功 0失败
+	 */
+	public Interger validataUser(String email,String password){
+		return null;
+	}
 	public NBAdmin validateAdmin(String username,String password){
 		try {
 			PreparedStatement p=connection.prepareStatement("select * from NBAdmin where username=? and password=?");
@@ -198,7 +205,7 @@ public class DB {
 	public NBVIPCategory getNBVCategoryByNBUserEmail(String eamil){
 		return null;
 	}
-	public NBVIPCategory getNBVCategoryByScore(int score){
+	public NBVIPCategory getNBVCategoryByScore(Integer score){
 		return null;
 	}
 	
@@ -299,31 +306,32 @@ public class DB {
 	// delete section
 	
 	
-	public int deleteNBAdmin(NBAdmin admin){
+	public Integer deleteNBAdmin(NBAdmin admin){
 		return 0;
 	}
-	public int deleteNBCategory(NBCategory c){
+
+	public Integer deleteNBCategory(NBCategory c){
 		return 0;
 	}
-	public int deleteNBOrder(NBOrder order){
+	public Integer deleteNBOrder(NBOrder order){
 		return 0;
 	}
-	public int deleteNBOrderInfo(NBOrderInfo orderInfo){
+	public Integer deleteNBOrderInfo(NBOrderInfo orderInfo){
 		return 0;
 	}
-	public int deleteNBProduct(NBProduct product){
+	public Integer deleteNBProduct(NBProduct product){
 		return 0;
 	}
-	public int deleteNBProductComment(NBProductComment comment){
+	public Integer deleteNBProductComment(NBProductComment comment){
 		return 0;
 	}
-	public int deleteNBUser(NBUser user){
+	public Integer deleteNBUser(NBUser user){
 		return 0;
 	}
-	public int deleteNBUserAddress(NBUserAddress address){
+	public Integer deleteNBUserAddress(NBUserAddress address){
 		return 0;
 	}
-	public int deleteNBVIPCategory(NBVIPCategory vipCategory){
+	public Integer deleteNBVIPCategory(NBVIPCategory vipCategory){
 		return 0;
 	}
 }
