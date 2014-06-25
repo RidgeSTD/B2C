@@ -2,10 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>B2C-hwl</display-name>
   <servlet>
-    <servlet-name>TradeQuery</servlet-name>
-    <servlet-class>edu.winlandiano.TradeQuery_serv</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>com.manager.login</servlet-class>
   </servlet>
@@ -13,13 +9,10 @@
     <servlet-name>Category_edit</servlet-name>
     <servlet-class>com.manager.Category_edit</servlet-class>
   </servlet>
-
-
-
-  <servlet-mapping>
-    <servlet-name>TradeQuery</servlet-name>
-    <url-pattern>/servlet/TradeQuery</url-pattern>
-  </servlet-mapping>
+  <servlet>
+    <servlet-name>Trade_Query_serv</servlet-name>
+    <servlet-class>edu.winlandiano.Trade_Query_serv</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
     <url-pattern>/servlet/login</url-pattern>
@@ -27,6 +20,10 @@
   <servlet-mapping>
     <servlet-name>Category_edit</servlet-name>
     <url-pattern>/servlet/Category_edit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Trade_Query_serv</servlet-name>
+    <url-pattern>/servlet/Trade_Query_serv</url-pattern>
   </servlet-mapping>
   
     <welcome-file-list>
