@@ -90,6 +90,17 @@ public class NBProduct {
 	public double getDiscount() {
 		return discount;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBProduct [id=" + id + ", categoryID=" + categoryID + ", name="
+				+ name + ", descrition=" + descrition + ", imagePath="
+				+ imagePath + ", price=" + price + ", discount=" + discount
+				+ ", numberLeft=" + numberLeft + "]";
+	}
 	/**
 	 * @param discount the discount to set
 	 */

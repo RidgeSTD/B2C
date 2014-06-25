@@ -9,3 +9,5 @@ create table NBProduct(id int primary key auto_increment,categoryID int ,name va
 create table NBProductComment(userID int ,productID int ,level int ,title varchar(200),content varchar(200),foreign key (userID) REFERENCES NBUser (id),foreign key (productID) REFERENCES NBProduct (id))DEFAULT CHARSET=utf8;
 create table NBUserAddress(userAddressID int primary key auto_increment,userID int ,receiverName varchar(200),address varchar(200),postCode varchar(200),telephone varchar(20),mobilephone varchar(20),isActive int,foreign key (userID) REFERENCES NBUser (id) )DEFAULT CHARSET=utf8;
 create table NBVIPCategory(ID int ,levelName varchar(200),leastScore int ,scorePercentage float)DEFAULT CHARSET=utf8;
+
+

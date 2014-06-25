@@ -197,7 +197,31 @@ public class DB {
 		return null;
 		
 	}
+	/**
+	 * 取出所有product
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @return
+	 */
 	public ArrayList<NBProduct> getNBProducts(){
+		ArrayList<NBProduct> product=new ArrayList<NBProduct>(1000);
+		PreparedStatement p;
+		try {
+			p = connection.prepareStatement("select * from nbproduct;");
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBProduct temp=new NBProduct(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getDouble(7), rs.getInt(8));
+				product.add(temp);
+				logger.info("get an nbproduct :"+temp);
+				
+			}
+			return product;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("get all product failed");
+		}
 		return null;
 
 	}
@@ -378,16 +402,120 @@ public class DB {
 		}
 		return price;
 	}
+	/**
+	 * 按照id得到产品对象
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param id
+	 * @return null表示失败
+	 */
 	public NBProduct getNBProductByID(Integer id){
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from nbproduct where id=?");
+			p.setInt(1, id);
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBProduct temp=new NBProduct(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getDouble(7), rs.getInt(8));
+				logger.info("NBProduct get:"+temp);
+				return temp;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("get product falied:"+id);
+		}
 		return null;
+		
 	}
+	/**
+	 * 商品搜索功能，提供like级别的查询服务
+	 * @author 赵国铨
+	 * 2014年6月25日
+	 * @param name 需要查询的关键字
+	 * @return ArrayList<NBProduct>
+	 */
 	public ArrayList<NBProduct> getNBProductsByName(String name){
+		ArrayList<NBProduct> product=new ArrayList<NBProduct>(100);
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from nbproduct where name like '%?%'");
+			
+			p.setString(1, name);
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBProduct temp=new NBProduct(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getDouble(7), rs.getInt(8));
+				product.add(temp);
+				logger.info("NBProduct get:"+temp);
+				
+			}
+			logger.info("get product name like this "+name+" success"+product.toString());
+			return product;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("get product list falied:");
+		}
 		return null;
 	}
+	/**
+	 * 按照productID得到商品评论
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param productID
+	 * @return
+	 */
 	public ArrayList<NBProductComment> getNBProductCommentsByProductID(Integer productID){
+		ArrayList<NBProductComment> productComment=new ArrayList<NBProductComment>(100);
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from nbproductcomment where productID=?");
+			p.setInt(1, productID);
+			
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBProductComment com=new NBProductComment(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+				
+				productComment.add(com);
+				logger.info("NBProductComment get:"+com);
+				
+			}
+			logger.info("get productComment name success"+productComment);
+			return productComment;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("get productComment list falied:");
+		}
 		return null;
 	}
-	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(Integer productID){
+	
+	/**
+	 * 按照email得到这个用户 的评论
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param email
+	 * @return
+	 */
+	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(String email){
+		ArrayList<NBProductComment> productComment=new ArrayList<NBProductComment>(100);
+		try {
+			NBUser user=getNBUserByEmail(email);
+			PreparedStatement p=connection.prepareStatement("select * from nbproductcomment where userID=?");
+			p.setInt(1, user.getId());
+			
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBProductComment com=new NBProductComment(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+				
+				productComment.add(com);
+				logger.info("NBProductComment get:"+com);
+				
+			}
+			logger.info("get "+user+" 's productComment name success"+productComment);
+			return productComment;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.severe("get "+email+" 's productComment list falied:");
+		}
 		return null;
 	}
 	/**
