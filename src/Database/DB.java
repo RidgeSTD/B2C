@@ -199,10 +199,10 @@ public class DB {
 	public ArrayList<NBProductComment> getNBProductCommentsByUserEmail(Integer productID){
 		return null;
 	}
-	public NBUser getUserByID(Integer id){
+	public NBUser getNBUserByID(Integer id){
 		return null;
 	}
-	public NBUser getUserByEmail(String email){
+	public NBUser getNBUserByEmail(String email){
 		//remember to set level string
 		//using getNBVIPCategoryByscore
 		return null;
@@ -215,11 +215,16 @@ public class DB {
 	public ArrayList<NBUserAddress> getNBUserAddressesByUserEmailIncludingInactive(String email){
 		return null;
 	}
-	public NBVIPCategory getNBVCategoryByNBUserEmail(String eamil){
+	public NBVIPCategory getNBVIPCategoryByNBUserEmail(String email){
 //		return null;
-		
+		NBUser user=getNBUserByEmail(email);
+		if(user!=null){
+			return getNBVIPCategoryByScore(user.getScore());
+
+		}
+		return null;
 	}
-	public NBVIPCategory getNBVCategoryByScore(Integer score){
+	public NBVIPCategory getNBVIPCategoryByScore(Integer score){
 		ArrayList<NBVIPCategory> cate=new ArrayList<NBVIPCategory>(20);
 		try {
 			PreparedStatement p=connection.prepareStatement("select * from NBVIPCategory");
@@ -326,7 +331,41 @@ public class DB {
 //		return 0;
 //	}
 	public Integer updateNBUser(String email,NBUser newUser){
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbuser "
+					+ "set nickname=? ,password=? where email=?");
+			p.setString(1, newUser.getNickname());
+			p.setString(2, newUser.getPassword());
+			p.setString(3, email);
+			p.execute();
+			logger.info("update user success "+newUser.getEmail());
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
+	}
+	
+	public Integer updateNBUser(String email,String password,NBUser newUser){
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbuser "
+					+ "set nickname=? ,password=? where email=? and password=?");
+			p.setString(1, newUser.getNickname());
+			p.setString(2, newUser.getPassword());
+			
+			p.setString(3, email);
+			p.setString(4, password);
+			
+			p.execute();
+			logger.info("update user success "+newUser.getEmail());
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+		
 	}
 	
 	/**
