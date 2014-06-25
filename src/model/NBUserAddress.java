@@ -1,6 +1,19 @@
 package model;
 import model.*;
 public class NBUserAddress {
+	private int userAddressID;
+	/**
+	 * @return the userAddressID
+	 */
+	protected int getUserAddressID() {
+		return userAddressID;
+	}
+	/**
+	 * @param userAddressID the userAddressID to set
+	 */
+	protected void setUserAddressID(int userAddressID) {
+		this.userAddressID = userAddressID;
+	}
 	private int  userID;
 	private	String receiverName;
 	private String address;

@@ -193,4 +193,70 @@ public class DB {
 	}
 	
 	
+	
+	//insert section
+	// containing insert SQL 
+	
+	public int insertNBAdmin(NBAdmin admin){
+		return 0;
+	}
+	public int insertNBCategory(NBCategory c){
+		return 0;
+	}
+	public int insertNBOrder(NBOrder order){
+		return 0;
+	}
+	public int insertNBOrderInfo(NBOrderInfo orderInfo){
+		return 0;
+	}
+	public int insertNBProduct(NBProduct product){
+		return 0;
+	}
+	public int insertNBProductComment(NBProductComment comment){
+		return 0;
+	}
+	public int insertNBUser(NBUser user){
+		return 0;
+	}
+	public int insertNBUserAddress(NBUserAddress address){
+		return 0;
+	}
+	public int insertNBVIPCategory(NBVIPCategory vipCategory){
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
+	//update section
+	//includeing UPDATE SQL
+	public int updateNBAdmin(String username,NBAdmin newAdmin){
+		return 0;
+	}
+	public int updateNBCategory(int categoryID,NBCategory newCategory){
+		return 0;
+	}
+	public int updateNBOrder(int orderID,NBOrder newOrder){
+		return 0;
+	}
+	public int updateNBOrderInfo(int orderID,int productID,NBOrderInfo newOrderInfo){
+		return 0;
+	}
+	public int updateNBProduct(int productID,NBProduct newProduct){
+		return 0;
+	}
+//	public int updateNBProductComment(NBProductComment comment){
+//		return 0;
+//	}
+	public int updateNBUser(String email,NBUser newUser){
+		return 0;
+	}
+	public int updateNBUserAddress(NBUserAddress address){
+		return 0;
+	}
+	public int updateNBVIPCategory(NBVIPCategory vipCategory){
+		return 0;
+	}
 }
