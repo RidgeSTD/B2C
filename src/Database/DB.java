@@ -1103,10 +1103,20 @@ public class DB {
 	 * @return 会员级别对象
 	 */
 	public NBVIPCategory getNBVIPCategoryByNBUserEmail(String email) {
-		// return null;
-		NBUser user = getNBUserByEmail(email);
-		if (user != null) {
-			return getNBVIPCategoryByScore(user.getScore());
+//		NBUser user = getNBUserByEmail(email);
+		//上面这句话引起了循环调用，删除！
+		try{
+		PreparedStatement p=connection.prepareStatement("select score from nbuser where email=?");
+		p.setString(1, email);
+		ResultSet rs=p.executeQuery();
+		int score=0;
+		while(rs.next()){
+			score=rs.getInt(1);
+		}
+		return getNBVIPCategoryByScore(score);
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -1299,7 +1309,7 @@ public class DB {
 	}
 
 	/**
-	 * 插入orderInfo返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
+	 * 插入orderInfo
 	 * 
 	 * @author 赵国铨 2014年6月25日
 	 * @param orderInfo
@@ -1309,19 +1319,15 @@ public class DB {
 	public NBOrderInfo insertNBOrderInfo(NBOrderInfo orderInfo) {
 		try {
 			PreparedStatement p = connection.prepareStatement(
-					"insert into nborderinfo values(?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+					"insert into nborderinfo values(?,?,?)");
 			p.setInt(1, orderInfo.getOrderID());
 			p.setInt(2, orderInfo.getProductID());
 			p.setInt(4, orderInfo.getNumber());
 			p.execute();
 
 			logger.info(" orderinfo inserted:" + orderInfo);
-			ResultSet rs = p.getGeneratedKeys();
-			while (rs.next()) {
-
-				return orderInfo;
-			}
+			return orderInfo;
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -1366,7 +1372,7 @@ public class DB {
 	}
 
 	/**
-	 * 插入评论返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
+	 * 插入评论
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param comment
@@ -1375,8 +1381,7 @@ public class DB {
 	public NBProductComment insertNBProductComment(NBProductComment comment) {
 		try {
 			PreparedStatement p = connection.prepareStatement(
-					"insert into nbproductcomment values(?,?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+					"insert into nbproductcomment values(?,?,?,?,?)");
 			p.setInt(1, comment.getUserID());
 			p.setInt(2, comment.getProductID());
 			p.setInt(3, comment.getLevel());
