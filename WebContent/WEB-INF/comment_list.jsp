@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" contentType = "text/html;
-charset = gb2312" pageEncoding = "GBK" %>
+charset = gb2312" pageEncoding = "UTF-8" %>
 <% String username = (String)session.getAttribute("username"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>

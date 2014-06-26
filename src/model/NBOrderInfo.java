@@ -47,6 +47,14 @@ public class NBOrderInfo {
 	public void setNumber(int number) {
 		this.number = number;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBOrderInfo [orderID=" + orderID + ", productID=" + productID
+				+ ", number=" + number + "]";
+	}
 	
 	
 }

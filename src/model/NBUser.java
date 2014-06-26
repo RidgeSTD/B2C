@@ -4,12 +4,50 @@ import java.util.Date;
 
 public class NBUser {
 	public NBUser(){}
-
+	private int id;
 	private String email;
 	private String nickname;
 	private String password;
 	private int score;
+	private String level;//TODO
+	
+	public NBUser(int id,String email, String nickname, String password, int score,
+			Date registerDate,String level ) {
+		super();
+		this.id=id;
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+		this.score = score;
+		this.level = level;
+		this.registerDate = registerDate;
+	}
+
 	private Date registerDate;
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	/**
+	 * @return the level
+	 */
+	public String getLevel() {
+		return level;
+	}
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(String level) {
+		this.level = level;
+	}
 	/**
 	 * @return the email
 	 */
@@ -70,15 +108,16 @@ public class NBUser {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	public NBUser(String email, String nickname, String password, int score,
-			Date registerDate) {
-		super();
-		this.email = email;
-		this.nickname = nickname;
-		this.password = password;
-		this.score = score;
-		this.registerDate = registerDate;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBUser [id=" + id + ", email=" + email + ", nickname="
+				+ nickname + ", password=" + password + ", score=" + score
+				+ ", level=" + level + ", registerDate=" + registerDate + "]";
 	}
+
 	
 	
 }

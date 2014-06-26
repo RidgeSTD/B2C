@@ -13,6 +13,17 @@
     <servlet-name>Trade_Query_serv</servlet-name>
     <servlet-class>edu.winlandiano.Trade_Query_serv</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Cart_delt_serv</servlet-name>
+    <servlet-class>edu.winlandiano.Cart_delt_serv</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Confirm_serv</servlet-name>
+    <servlet-class>edu.winlandiano.Confirm_serv</servlet-class>
+  </servlet>
+
+
+
   <servlet-mapping>
     <servlet-name>login</servlet-name>
     <url-pattern>/servlet/login</url-pattern>
@@ -24,6 +35,14 @@
   <servlet-mapping>
     <servlet-name>Trade_Query_serv</servlet-name>
     <url-pattern>/servlet/Trade_Query_serv</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Cart_delt_serv</servlet-name>
+    <url-pattern>/servlet/Cart_delt_serv</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Confirm_serv</servlet-name>
+    <url-pattern>/servlet/Confirm_serv</url-pattern>
   </servlet-mapping>
   
     <welcome-file-list>

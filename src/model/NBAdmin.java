@@ -8,6 +8,7 @@ public class NBAdmin {
 		this.username = username;
 		this.password = password;
 	}
+	
 	public NBAdmin(){}
 	/**
 	 * @return the username
@@ -32,6 +33,14 @@ public class NBAdmin {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBAdmin [username=" + username + ", password=" + password + "]";
 	}
 	
 	

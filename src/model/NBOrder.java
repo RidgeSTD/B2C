@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import Database.DB;
+
 public class NBOrder {
 	public NBOrder(){}
 	private int orderID;
@@ -11,6 +13,54 @@ public class NBOrder {
 	private int state;
 	private int scoreGet;
 	private double price;
+	private int userAddressID;
+	/**
+	 * 需要price的构造方法，不会计算price的大小。
+	 * @param orderID
+	 * @param userID
+	 * @param orderDate
+	 * @param state
+	 * @param scoreGet
+	 * @param userAddressID
+	 * @param price
+	 */
+	public NBOrder(int orderID, int userID, Date orderDate, int state,
+			int scoreGet,  int userAddressID,double price) {
+		super();
+		this.orderID = orderID;
+		this.userID = userID;
+		this.orderDate = orderDate;
+		this.state = state;
+		this.scoreGet = scoreGet;
+		
+		this.userAddressID = userAddressID;
+		this.price = price;
+		//TODO set price!!!
+		
+	}
+	/**
+	 * 不需要price来构造NBOrder的方法，price自动计算
+	 * @param orderID
+	 * @param userID
+	 * @param orderDate
+	 * @param state
+	 * @param scoreGet
+	 * @param userAddressID
+	 */
+public NBOrder(int orderID, int userID, Date orderDate, int state,
+			int scoreGet, int userAddressID) {
+		super();
+		this.orderID = orderID;
+		this.userID = userID;
+		this.orderDate = orderDate;
+		this.state = state;
+		this.scoreGet = scoreGet;
+		this.userAddressID = userAddressID;
+		DB db=Database.DB.getInstance();
+		this.price=db.getNBOrderPriceByOrderID(orderID);
+		
+	}
+	//	private int userAddressID;
 	/**
 	 * @return the price
 	 */
@@ -53,8 +103,8 @@ public class NBOrder {
 	public  int getOrderID() {
 		return orderID;
 	}
-	private int userAddressID;
-	public void setOrderID(int orderID) {
+	
+public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
 	public Date getOrderDate() {
@@ -75,16 +125,16 @@ public class NBOrder {
 	public void setScoreGet(int scoreGet) {
 		this.scoreGet = scoreGet;
 	}
-	public NBOrder(int orderID, int userID, Date orderDate, int state,
-			int scoreGet, int userAddressID,int price) {
-		super();
-		this.orderID = orderID;
-		this.userID = userID;
-		this.orderDate = orderDate;
-		this.state = state;
-		this.scoreGet = scoreGet;
-		this.userAddressID = userAddressID;
-		this.price=price;
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBOrder [orderID=" + orderID + ", userID=" + userID
+				+ ", orderDate=" + orderDate + ", state=" + state
+				+ ", scoreGet=" + scoreGet + ", price=" + price
+				+ ", userAddressID=" + userAddressID + "]";
 	}
 	
 	

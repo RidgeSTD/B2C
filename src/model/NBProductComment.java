@@ -76,5 +76,14 @@ public class NBProductComment {
 		this.title = title;
 		this.content = content;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBProductComment [userID=" + userID + ", productID="
+				+ productID + ", level=" + level + ", title=" + title
+				+ ", content=" + content + "]";
+	}
 	
 }

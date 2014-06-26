@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page pageEncoding = "UTF-8"%>
 <%@page import="java.util.*, model.*, Database.*" %>
 <html>
 <head>
@@ -75,22 +76,23 @@ document.form1.webUserEntity.phone="";
 				<%
 				DB db = DB.getInstance();
 				
-				/* ArrayList<NBOrder> orderList = session.getAttribute("orderList_hwl"); */
+				ArrayList<NBOrder> orderList = (ArrayList<NBOrder>)session.getAttribute("orderList_hwl"); 
 				for (NBOrder order : orderList){
-					NBUser user = db.getUserByID(order.getUserID());
+					NBUser user = db.getNBUserByID(new Integer(order.getUserID()));
 					Date orderDate = order.getOrderDate();
 					String stateString = "已支付";
 					if (order.getState()==0){
 					stateString = "未支付";
+					}
 				%>
 				  <tr>
             		<td><%=order.getUserID() %></td>
 					<td><%=user.getEmail() %></td>
-					<td><%=orderDate.getYear()%>-<%=orderDate.getMonth()%>-<%=orderDate.getDate()%>&nbsp;<%=orderDate.getHours() %>:<%orderDate.getMinutes() %>:<%orderDate.getSeconds() %></td>
-					<td><%=stateString %></td>
-					<td><a href="order_info.html"><img src="../image/xq.gif" alt="详情" class="picture"></a></td>
+					<td><%=orderDate.getYear()%>-<%=orderDate.getMonth()%>-<%=orderDate.getDate()%>&nbsp;<%=orderDate.getHours() %>:<%=orderDate.getMinutes() %>:<%=orderDate.getSeconds() %></td>
+					<td><%out.println(stateString); %></td>
+					<td><a href="order_info.html?orderId=<%=order.getOrderID() %>>"><img src="../image/xq.gif" alt="详情" class="picture"></a></td>
           		  </tr>
-				<%
+			<%
 				} 
 				%>
 				 </tbody>
