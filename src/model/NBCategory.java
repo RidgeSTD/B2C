@@ -8,6 +8,30 @@ public class NBCategory {
 	private String description;
 	private String imagePath;
 	/**
+	 * @return the iD
+	 */
+	public int getID() {
+		return ID;
+	}
+	/**
+	 * @param iD the iD to set
+	 */
+	public void setID(int iD) {
+		ID = iD;
+	}
+	/**
+	 * @return the fatherID
+	 */
+	public int getFatherID() {
+		return fatherID;
+	}
+	/**
+	 * @param fatherID the fatherID to set
+	 */
+	public void setFatherID(int fatherID) {
+		this.fatherID = fatherID;
+	}
+	/**
 	 * @return the name
 	 */
 	public String getName() {

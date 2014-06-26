@@ -26,7 +26,6 @@ public class DB {
 	}
 	private DB(){
 		try{
-			//TODO connect to m
 			Class.forName("com.mysql.jdbc.Driver");
 			connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/B2C.NB","root","");
 //			Statement s=con.createStatement();
@@ -100,12 +99,20 @@ public class DB {
 			logger.info("user " +email+" validated");
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("validate user failed"+email);
 		}
 		return 0;
 	}
 	
+	/**
+	 * 验证管理员
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param username
+	 * @param password
+	 * @return 返回经过验证的管理员对象
+	 */
 	public NBAdmin validateAdmin(String username,String password){
 		try {
 			PreparedStatement p=connection.prepareStatement("select * from NBAdmin where username=? and password=?");
@@ -119,7 +126,6 @@ public class DB {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		logger.severe("get admin failed");
@@ -164,7 +170,6 @@ public class DB {
 				logger.info("order add "+tempOrder);				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("get all orders failed");
 		}
@@ -225,21 +230,111 @@ public class DB {
 		return null;
 
 	}
+	/**
+	 * 得到数据库中全部comment
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @return
+	 */
 	public ArrayList<NBProductComment> getProductComments(){
+		ArrayList<NBProductComment> productComment=new ArrayList<NBProductComment>(1000);
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from nbproductcomment");
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				NBProductComment com=new NBProductComment(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+				productComment.add(com);
+				logger.info("NBProductComment get:"+com);
+				
+			}
+			logger.info("get all productComment  success"+productComment);
+			return productComment;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("get all productComment list falied:");
+		}
 		return null;
 
 	}
+	
+	/**
+	 * 得到全部用户对象
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @return
+	 */
 	public ArrayList<NBUser> getNBUsers(){
+		PreparedStatement p;
+		ArrayList<NBUser> users=new ArrayList<NBUser>(1000);
+		try {
+			p = connection.prepareStatement("select * from nbuser");
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				rs.next();
+				NBUser user=new NBUser(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), new java.util.Date(rs.getDate(6).getTime()), null);
+				//!!!setlevel!!!
+				user.setLevel(getNBVIPCategoryByNBUserEmail(user.getEmail()).getLevelName());
+				logger.info("user:"+user+"selected,level wrote");
+				users.add(user);
+			}
+			
+			return users;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("selecte all user failed");
+		}
 		return null;
-
 	}
+	/**
+	 * 得到全部地址，不包括已经“删除的”
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @return
+	 */
 	public ArrayList <NBUserAddress> getNBUserAddress(){
+		ArrayList<NBUserAddress> addresses=new ArrayList<NBUserAddress>();
+		try{
+			PreparedStatement p=connection.prepareStatement("select * from nbuseraddress");
+			ResultSet rs=p.executeQuery();
+			while (rs.next()){
+				NBUserAddress temp=new NBUserAddress(rs.getInt(1), rs.getInt(2), rs.getString(3)
+						, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				if(temp.getIsActive()==1)
+					addresses.add(temp);
+				logger.info(temp.toString());
+			}
+			logger.info("get all address success");
+			return addresses;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
-
 	}
+	
+	/**
+	 * 得到全部VIP category，未经排序。
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @return
+	 */
 	public ArrayList<NBVIPCategory> getVIPCategorys(){
-		return null;
+		ArrayList<NBVIPCategory> cate=new ArrayList<NBVIPCategory>(20);
+		try {
+			PreparedStatement p=connection.prepareStatement("select * from NBVIPCategory");
+			ResultSet rs=p.executeQuery();
+			while(rs.next()){
+				cate.add(new NBVIPCategory(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4)));
+			}
+			logger.info("get all vipcategory success");
+			return cate;
+		} catch (SQLException e) {
 
+			e.printStackTrace();
+		}
+		logger.severe("get all vip category failed");
+		return null;
 	}
 	
 	/**
@@ -385,7 +480,6 @@ public class DB {
 		return null;
 	}
 	
-	//TODO
 	/**
 	 * 计算订单价格
 	 * @author 赵国铨
@@ -420,7 +514,6 @@ public class DB {
 				return temp;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("get product falied:"+id);
 		}
@@ -450,7 +543,6 @@ public class DB {
 			logger.info("get product name like this "+name+" success"+product.toString());
 			return product;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("get product list falied:");
 		}
@@ -480,7 +572,6 @@ public class DB {
 			logger.info("get productComment name success"+productComment);
 			return productComment;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("get productComment list falied:");
 		}
@@ -512,7 +603,6 @@ public class DB {
 			logger.info("get "+user+" 's productComment name success"+productComment);
 			return productComment;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("get "+email+" 's productComment list falied:");
 		}
@@ -541,7 +631,6 @@ public class DB {
 			return user;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("user :"+id+"is not selected,failed");
 		}
@@ -573,7 +662,6 @@ public class DB {
 			return user;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("user :"+email+"is not selected,failed");
 		}
@@ -668,18 +756,34 @@ public class DB {
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		logger.severe("get useraddress by id failed");
 		return null;
 	}
 	
+	/**
+	 * 根据email得到某个用户的会员级别
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param email
+	 * @return 会员级别对象
+	 */
 	public NBVIPCategory getNBVIPCategoryByNBUserEmail(String email){
 //		return null;
 		NBUser user=getNBUserByEmail(email);
 		if(user!=null){
 			return getNBVIPCategoryByScore(user.getScore());
-
 		}
 		return null;
 	}
+	
+	//TODO 记得在数据库中添加相应表项
+	/**
+	 * 根据积分得到级别NBVIPCategory对象不然无法执行这个函数
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param score 积分
+	 * @return 
+	 */
 	public NBVIPCategory getNBVIPCategoryByScore(Integer score){
 		ArrayList<NBVIPCategory> cate=new ArrayList<NBVIPCategory>(20);
 		try {
@@ -704,10 +808,11 @@ public class DB {
 					}
 				}
 			}
+			logger.info("getNBVIPCategoryByScore success"+selected);
 			return selected;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("getNBVIPCategoryByScore failed");
 		}
 		return null;
 	}
@@ -717,15 +822,79 @@ public class DB {
 	//insert section
 	// containing insert SQL 
 	
-	public Integer insertNBAdmin(NBAdmin admin){
-		return 0;
+	@Deprecated
+	/**
+	 * 插入管理员
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param admin
+	 * @return
+	 */
+	Integer insertNBAdmin(NBAdmin admin){
+		try {
+			PreparedStatement p=connection.prepareStatement("insert into nbadmin values(?,?)");
+			p.setString(1, admin.getUsername());
+			p.setString(2, admin.getPassword());
+			p.execute();
+			logger.severe("插入管理员成功"+admin);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("插入管理员失败"+admin);
+			return 0;
+		}
+		
 	}
+	/**
+	 * 插入类别
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param c
+	 * @return 1成功   0失败
+	 */
 	public Integer insertNBCategory(NBCategory c){
-		return 0;
-	}
+		try {
+			PreparedStatement p=connection.prepareStatement("insert into NBcategory values(null,?,?,?,?)");
+			p.setString(1, c.getName());
+			p.setInt(2	, c.getFatherID());
+			p.setString(3, c.getDescription());
+			p.setString(4, c.getImagePath());
+			p.execute();
+			logger.severe("插入category成功"+c);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("插入category失败"+c);
+			return 0;
+			}	
+		}
+	
+	/**
+	 * 插入order
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param order
+	 * @return
+	 */
 	public Integer insertNBOrder(NBOrder order){
-		return 0;
+		try {
+			PreparedStatement p=connection.prepareStatement("insert into NBOrder values(null,?,?,?,?,?)");
+			p.setInt(1, order.getUserID());
+			p.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
+			p.setInt(3,order.getState());
+			p.setInt(4,order.getScoreGet());
+			p.setInt(5, order.getUserAddressID());
+			
+			p.execute();
+			logger.severe("插入order成功"+order);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("插入order失败"+order);
+			return 0;
+		}	
 	}
+	
 	
 	/**
 	 * 插入orderInfo
@@ -751,12 +920,66 @@ public class DB {
 		}
 		return null;
 	}
+	/**
+	 * 插入product
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param product
+	 * @return
+	 */
 	public Integer insertNBProduct(NBProduct product){
-		return 0;
+		try {
+			PreparedStatement p = connection.prepareStatement("insert into NBproduct values(null,?,?,?,?,?,?)");
+			p.setInt(1, product.getCategoryID());
+			p.setString(2,product.getDescrition());
+			p.setString(3,product.getImagePath());
+			p.setDouble(4,product.getPrice());
+			p.setDouble(5,product.getDiscount());
+			p.setInt(6,product.getNumberLeft());
+			p.execute();
+			
+			logger.info(" product inserted:"+product);
+			return 1;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("insert pruduct"+product+"faild");
+		}
+		return null;
+		
 	}
+	/**
+	 * 插入评论
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param comment
+	 * @return
+	 */
 	public Integer insertNBProductComment(NBProductComment comment){
-		return 0;
+		try {
+			PreparedStatement p = connection.prepareStatement("insert into nbproductcomment values(?,?,?,?,?)");
+			p.setInt(1, comment.getUserID());
+			p.setInt(2, comment.getProductID());
+			p.setInt(3,comment.getLevel());
+			p.setString(4, comment.getTitle());
+			p.setString(5, comment.getContent());
+			p.execute();
+			logger.info(" productcomment inserted:"+comment);
+			return 1;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			logger.severe("insert pruductcomment"+comment+"faild");
+		}
+		return null;
 	}
+	/**
+	 * 插入用户
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param user
+	 * @return
+	 */
 	public Integer insertNBUser(NBUser user){
 		try {
 			PreparedStatement p =connection.prepareStatement("insert into NBUser values"
@@ -770,8 +993,8 @@ public class DB {
 			logger.info("insert user success"+user);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("insert user faild"+user);
 		}
 		return 0;
 	}
@@ -798,12 +1021,33 @@ public class DB {
 			logger.info("insert useraddress success"+address.toString());
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("useraddress 插入失败"+address);
 		}
 		return 0;
 	}
+	
+	/**
+	 * 插入用户会员级别
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param vipCategory
+	 * @return
+	 */
 	public Integer insertNBVIPCategory(NBVIPCategory vipCategory){
+		try {
+			PreparedStatement p =connection.prepareStatement("insert into nbvipcategory values"
+					+ "(null,?,?,?)");
+			p.setString(1, vipCategory.getLevelName());
+			p.setInt(2, vipCategory.getLeastScore());
+			p.setDouble(3, vipCategory.getScorePercentage());
+			p.execute();
+			logger.info("insert nbvipcategory success"+vipCategory);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("nbvipcategory 插入失败"+vipCategory);
+		}
 		return 0;
 	}
 	
