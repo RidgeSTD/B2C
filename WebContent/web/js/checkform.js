@@ -30,7 +30,11 @@ document.form1.password.value="";
 document.form1.password.focus();
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="home.html";
+=======
+window.location.href="home.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 }
 }
 
@@ -64,7 +68,11 @@ document.form1.password1.focus();
 return false;
 }
 else{
+<<<<<<< HEAD
 window.location.href="order_confirm_new.html";
+=======
+window.location.href="order_confirm_new.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 }
 }
 
@@ -78,7 +86,11 @@ window.alert("请输入密码！");
 document.form1.password.focus();
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="home.html";
+=======
+window.location.href="home.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 
 }
@@ -93,7 +105,11 @@ window.alert("请输入密码！");
 document.form1.password.focus();
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="order_confirm.html";
+=======
+window.location.href="order_confirm.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 
 }
@@ -118,7 +134,11 @@ document.form1.phone.focus();
 return false;
 }
 else{
+<<<<<<< HEAD
 window.location.href="address.html";
+=======
+window.location.href="address.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 
 }
@@ -142,7 +162,11 @@ return false;
 document.form1.phone.focus();
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="order_confirm.html";
+=======
+window.location.href="order_confirm.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 
 }
@@ -158,7 +182,11 @@ if(k===0){
 window.alert("请打分！");
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="item_info.html";
+=======
+window.location.href="item_info.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 
 }
@@ -175,7 +203,11 @@ return false;
 
 }else{
 window.alert("密码已发送到您的邮箱，请查收！");	
+<<<<<<< HEAD
 window.location.href="pwd_find.html";
+=======
+window.location.href="pwd_find.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 	}
 
 }
@@ -194,7 +226,11 @@ window.alert("请再次输入新密码！");
 document.form1.passwordConfirm.focus();
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="home.html";
+=======
+window.location.href="home.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 }
 
@@ -279,7 +315,11 @@ return false;
 document.form1.phone.focus();
 return false;
 }else{
+<<<<<<< HEAD
 window.location.href="address_daohang.html";
+=======
+window.location.href="address_daohang.jsp";
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 } 
 
 }

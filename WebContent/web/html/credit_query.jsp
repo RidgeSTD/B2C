@@ -1,8 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<<<<<<< HEAD
+=======
+<%@ page pageEncoding = "UTF-8"%>
+<%@page import="model.*,java.util.*,Database.*"%>
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 <html>
 <head>
 <title>BC2商城</title>
 <link href="../css/frame.css" rel="stylesheet" type="text/css">
+<<<<<<< HEAD
    </head>
 
 <body>
@@ -29,15 +35,42 @@
 		</ul>
 	</div>
 	<div id="banner"></div>
+=======
+</head>
+
+<body>
+<%@ include file="header.jsp" %>
+	<div id="banner"></div>
+	
+	
+	<%
+	DB db = DB.getInstance();
+	System.out.println("hahaha!the session = "+(String)session.getAttribute("userEmail"));
+	int i=1;
+	i=2;
+	NBUser user = db.getNBUserByEmail((String)session.getAttribute("userEmail"));
+	ArrayList<NBOrder> orderList = db.getNBOrdersByUserEmail((String)session.getAttribute("userEmail"));
+	%>
+	
+	<jsp:useBean id="credit" class="model.NBUser" scope="request"></jsp:useBean>
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 	<div id="main">
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
+<<<<<<< HEAD
 				网站路径：<a href="home.html">首页</a>&gt;&gt;<a href="">积分查询</a>
 			</div>
 			<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
 			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+=======
+				网站路径：<a href="home.jsp">首页</a>&gt;&gt;<a href="">积分查询</a>
+			</div>
+			<div id="searchright2">
+			  <input type="text" name="product" id="textInput"/>
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">
@@ -50,7 +83,11 @@
 			  </div>
 		</div>
 		<div id="sendnote">
+<<<<<<< HEAD
 			<div id="sendnotehead"><strong>当前积分：</strong></div>
+=======
+			<div id="sendnotehead"><strong>当前积分<%=credit.getScore() %></strong></div>
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 			<div id="sendnotecontent">
 				<table id="creditquery">
 				<caption>
@@ -65,6 +102,7 @@
 					</tr>
 				</thead>
 				<tbody>
+<<<<<<< HEAD
 				  <tr>
             		<td>
 						<a href="order_info.html">1483728</a>
@@ -93,6 +131,27 @@
 						70
 					</td>
           		  </tr>
+=======
+				<%
+				System.out.println(orderList.toString());
+				for (NBOrder order : orderList){ 
+				%>
+				  <tr>
+            		<td>
+						<a href="/servlet/Queren?orderID=<%=order.getOrderID()%>"><%=order.getOrderID() %></a>
+					</td>
+					<td>
+						<%=order.getOrderDate() %>
+					</td>
+					<td>
+						<%=order.getPrice()%>
+					</td>
+					<td>
+						<%=order.getScoreGet() %>
+					</td>
+          		  </tr>
+				 <%} %>
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 				 </tbody>
             </table>	
 			</div>

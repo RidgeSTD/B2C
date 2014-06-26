@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="B2C.NB">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
@@ -6,3 +7,13 @@
         <property name="java-output-path" value="/B2C.NB/build/classes"/>
     </wb-module>
 </project-modules>
+=======
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="B2C">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="B2C"/>
+        <property name="java-output-path" value="/B2C/WebContent/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44

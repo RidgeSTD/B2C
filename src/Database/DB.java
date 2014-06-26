@@ -413,7 +413,12 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
+<<<<<<< HEAD
 						rs.getInt(4), rs.getInt(5), rs.getInt(6));
+=======
+						rs.getInt(4), rs.getInt(5), rs.getInt(6),
+						rs.getDouble(7));
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 
 				logger.info("order selected " + tempOrder);
 				return tempOrder;
@@ -547,7 +552,12 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
+<<<<<<< HEAD
 						rs.getInt(4), rs.getInt(5), rs.getInt(6));
+=======
+						rs.getInt(4), rs.getInt(5), rs.getInt(6),
+						rs.getDouble(7));
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 				list.add(tempOrder);
 				logger.info("order add " + tempOrder);
 			}
@@ -577,8 +587,13 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
+<<<<<<< HEAD
 						rs.getInt(4), rs.getInt(5), rs.getInt(6)
 						);
+=======
+						rs.getInt(4), rs.getInt(5), rs.getInt(6),
+						rs.getDouble(7));
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 				orders.add(tempOrder);
 				logger.info("order selected " + tempOrder);
 			}
@@ -616,8 +631,13 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
+<<<<<<< HEAD
 						rs.getInt(4), rs.getInt(5), rs.getInt(6)
 						);
+=======
+						rs.getInt(4), rs.getInt(5), rs.getInt(6),
+						rs.getDouble(7));
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 				if (tempOrder.getOrderDate().after(startDate)
 						&& tempOrder.getOrderDate().before(endDate))
 					;
@@ -804,7 +824,11 @@ public class DB {
 		PreparedStatement p;
 		try {
 			NBCategory c = getNBCategoryByName(name);
+<<<<<<< HEAD
 //			logger.severe("zgq:"+c);
+=======
+
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 			p = connection
 					.prepareStatement("select * from nbproduct where id=?");
 			p.setInt(1, c.getID());
@@ -840,7 +864,11 @@ public class DB {
 		ArrayList<NBProduct> product = new ArrayList<NBProduct>(100);
 		try {
 			PreparedStatement p = connection
+<<<<<<< HEAD
 					.prepareStatement("select * from nbproduct where name like ?");
+=======
+					.prepareStatement("select * from nbproduct where name like '%?%'");
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 
 			p.setString(1, name);
 			ResultSet rs = p.executeQuery();
@@ -1038,7 +1066,11 @@ public class DB {
 		PreparedStatement p;
 		try {
 			// p=connection.prepareStatement("select * from nbvipcategory where ")
+<<<<<<< HEAD
 			p = connection.prepareStatement("select * from nbuser where "
+=======
+			p = connection.prepareStatement("select * from nbuser where"
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 					+ "id=?");
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
@@ -1101,6 +1133,7 @@ public class DB {
 	 * @return 会员级别对象
 	 */
 	public NBVIPCategory getNBVIPCategoryByNBUserEmail(String email) {
+<<<<<<< HEAD
 //		NBUser user = getNBUserByEmail(email);
 		//上面这句话引起了循环调用，删除！
 		try{
@@ -1115,6 +1148,12 @@ public class DB {
 		}
 		catch(Exception e){
 			e.printStackTrace();
+=======
+		// return null;
+		NBUser user = getNBUserByEmail(email);
+		if (user != null) {
+			return getNBVIPCategoryByScore(user.getScore());
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 		}
 		return null;
 	}
@@ -1307,7 +1346,11 @@ public class DB {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * 插入orderInfo
+=======
+	 * 插入orderInfo返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 	 * 
 	 * @author 赵国铨 2014年6月25日
 	 * @param orderInfo
@@ -1317,6 +1360,7 @@ public class DB {
 	public NBOrderInfo insertNBOrderInfo(NBOrderInfo orderInfo) {
 		try {
 			PreparedStatement p = connection.prepareStatement(
+<<<<<<< HEAD
 					"insert into nborderinfo values(?,?,?)");
 			p.setInt(1, orderInfo.getOrderID());
 			p.setInt(2, orderInfo.getProductID());
@@ -1326,6 +1370,21 @@ public class DB {
 			logger.info(" orderinfo inserted:" + orderInfo);
 			return orderInfo;
 			
+=======
+					"insert into nborderinfo values(?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			p.setInt(1, orderInfo.getOrderID());
+			p.setInt(2, orderInfo.getProductID());
+			p.setInt(4, orderInfo.getNumber());
+			p.execute();
+
+			logger.info(" orderinfo inserted:" + orderInfo);
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+
+				return orderInfo;
+			}
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -1370,7 +1429,11 @@ public class DB {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * 插入评论
+=======
+	 * 插入评论返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param comment
@@ -1379,7 +1442,12 @@ public class DB {
 	public NBProductComment insertNBProductComment(NBProductComment comment) {
 		try {
 			PreparedStatement p = connection.prepareStatement(
+<<<<<<< HEAD
 					"insert into nbproductcomment values(?,?,?,?,?)");
+=======
+					"insert into nbproductcomment values(?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 			p.setInt(1, comment.getUserID());
 			p.setInt(2, comment.getProductID());
 			p.setInt(3, comment.getLevel());
@@ -1438,7 +1506,11 @@ public class DB {
 	public NBUserAddress insertNBUserAddress(NBUserAddress address) {
 		try {
 			PreparedStatement p = connection.prepareStatement(
+<<<<<<< HEAD
 					"insert into nbuserAddress values" + "(null,?,?,?,?,?,?,1)",
+=======
+					"insert into nbuserAddress values" + "(null,?,?,?,?,?,1)",
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 					Statement.RETURN_GENERATED_KEYS);
 			p.setInt(1, address.getUserID());
 			p.setString(2, address.getReceiverName());

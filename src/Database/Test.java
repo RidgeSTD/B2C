@@ -1,5 +1,6 @@
 package Database;
 
+<<<<<<< HEAD
 
 
 import java.sql.PreparedStatement;
@@ -7,10 +8,16 @@ import java.util.ArrayList;
 
 import model.*;
 import Database.*;
+=======
+import java.sql.PreparedStatement;
+
+import model.NBOrder;
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 
 public class Test {
 	public static void main(String[]args){
 		DB db=DB.getInstance();
+<<<<<<< HEAD
 		NBAdmin admin=db.validateAdmin("admin", "admin");
 		if(admin!=null){
 			System.out.println("admin 登陆成功");
@@ -85,4 +92,13 @@ public class Test {
 		System.out.println(db.getNBVIPCategoryByScore(10));
 	}
 	private static DB db=DB.getInstance();
+=======
+//		NBOrder order=new NBOrder(orderID, userID, orderDate, state, scoreGet, userAddressID)
+//		NBOrder order =new NBOrder(1, 1, new java.util.Date(2014-1900,6,25), 0, 0, 1, 100.0);
+		System.out.println(order);
+//		Integer a=db.insertNBOrder(order);
+//		System.out.println(a);
+		
+	}
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 }

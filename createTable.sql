@@ -1,5 +1,8 @@
 --数据库设计
+<<<<<<< HEAD
 --C:\Users\Guoquan\workspace\B2C\createTable.sql
+=======
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 -- Zhaoguoquan All rights reserverd
 -- 首先遇到的问题是所有中文都是？？？
 
@@ -21,6 +24,10 @@
 -- 插入的时候进入console，用source命令可以直接执行sql文件。可以这样建表。
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 create database b2c;
 use b2c;
 create table NBAdmin(username varchar(20) primary key ,
@@ -83,6 +90,7 @@ create table NBVIPCategory(ID int ,
 insert into nbadmin values ('admin',
 		'admin');
 
+<<<<<<< HEAD
 
 	
 	
@@ -138,12 +146,40 @@ insert into nbcategory values
     (23,'康乃馨',4,'该目录下包括了时下康乃馨的价格信息。',null);
 
 insert into nbuser values (1,
+=======
+insert into nbcategory values (1,
+		'图书音像',
+	1,
+	'该目录下包括图书、音像商品，其中图书涵盖了计算机用书、外语书籍、教科书、考试用书，种类齐全。',
+	null);
+insert into nbcategory values (2,
+		'时尚生活',
+	2,
+	'该目录下包括时下热点话题，时尚前沿，国际视角，确保使用者能够领略时尚的魅力。',
+	null);
+insert into nbcategory values (3,
+		'数码产品',
+	3,
+	'该目录下包括照相、摄像所需的大多数设备，比如单反、录像机等等，为用户提供丰富的产品选择。',
+	null);
+insert into nbcategory values (4,
+		'鲜花速递',
+	4,
+	'该目录下包括鲜花分类推荐、鲜花预定、鲜花定时送货上门等贴心服务，为消费者提供优质服务。',
+	null);
+
+insert into nbuser values (null,
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 		'michael@163.com',
 	'菊花',
 	'juhuaduoduo',
 	0,
 	'2014-6-26');
+<<<<<<< HEAD
 insert into nbuser values (2,
+=======
+insert into nbuser values (null,
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 		'scofiled@163.com',
 	'采摘',
 	'renjuncaizhai',
@@ -162,7 +198,11 @@ insert into NBProduct values (1,
 		1,
 	'教你如何3天提升逼格',
 	'这是一本非常提升逼格的书，来自5049专供，华大师亲笔题词',
+<<<<<<< HEAD
 	 'B2C/web/image/ssbs.jpg',
+=======
+	 '/B2C/web/image/ssbs.jpg',
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
  	52.5,
 	0.9,
 	3);
@@ -176,7 +216,10 @@ insert into nborder values(1,
 insert into nborderinfo values(1,
 		1,
 	10);
+<<<<<<< HEAD
 insert into nbvipcategory value(1,'普通会员', 0, 1);
 insert into nbvipcategory value(2,'银卡', 3000, 1.2);
 insert into nbvipcategory value(3,'金卡', 8000, 1.3);
 insert into nbvipcategory value(4,'白金卡', 15000, 1.4);
+=======
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44

@@ -87,7 +87,11 @@ public class NBOrderWrap {
 	 */
 	
 	/**
+<<<<<<< HEAD
 	 * 提供了方便的创建order的方法，只要通过public的 正常构造方法传入order，orderinfo的list，user，address.期中user，address数据库中必须存在！！
+=======
+	 * 提供了方便的创建order的方法，只要通过public的 正常构造方法传入order，orderinfo的list，user，address
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 	 * 就可以在不需要计算ID的情况下插入数据库相应信息。
 	 * 具体来说，就是order的id随便写，orderInfo的fatherid随便写
 	 * @author 赵国铨
@@ -96,6 +100,7 @@ public class NBOrderWrap {
 	 */
 	public NBOrderWrap save(){
 		DB db=DB.getInstance();
+<<<<<<< HEAD
 		order.setUserID(user.getId());
 		order.setUserAddressID(address.getUserAddressID());
 		order=db.insertNBOrder(order);
@@ -105,6 +110,17 @@ public class NBOrderWrap {
 		}
 		
 		
+=======
+		
+		order=db.insertNBOrder(order);
+		for(NBOrderInfo info:orderInfo){
+			info.setOrderID(order.getOrderID());
+			db.insertNBOrderInfo(info);
+		}
+		
+		
+		
+>>>>>>> 97dd15d7dc8413eb473ec5d5d137f50a8d3bca44
 		return null;
 	}
 	@Override
