@@ -1,6 +1,8 @@
 package model;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
+
 import Database.DB;
 /**
  * 鉴于文澜提的查询太麻烦问题，这里提出了新的解决方案，Ordre，orderInfo，user，userAddress全部在这里封装。
@@ -83,6 +85,28 @@ public class NBOrderWrap {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	
+	/**
+	 * 提供了方便的创建order的方法，只要通过public的 正常构造方法传入order，orderinfo的list，user，address
+	 * 就可以在不需要计算ID的情况下插入数据库相应信息。
+	 * 具体来说，就是order的id随便写，orderInfo的fatherid随便写
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @return 封装好的father，id都设置完成的NBOrderWrap对象
+	 */
+	public NBOrderWrap save(){
+		DB db=DB.getInstance();
+		
+		order=db.insertNBOrder(order);
+		for(NBOrderInfo info:orderInfo){
+			info.setOrderID(order.getOrderID());
+			db.insertNBOrderInfo(info);
+		}
+		
+		
+		
+		return null;
+	}
 	@Override
 	public String toString() {
 		return "NBOrderWrap [order=" + order + ", orderInfo=" + orderInfo

@@ -1009,8 +1009,7 @@ public class DB {
 		PreparedStatement p;
 		try {
 			// p=connection.prepareStatement("select * from nbvipcategory where ")
-			p = connection.prepareStatement("select * from nbuser where"
-					+ "email=?");
+			p = connection.prepareStatement("select * from nbuser where email=?");
 			p.setString(1, email);
 			ResultSet rs = p.executeQuery();
 			rs.next();
