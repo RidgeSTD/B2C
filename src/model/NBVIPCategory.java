@@ -7,6 +7,18 @@ public class NBVIPCategory {
 	private int leastScore;
 	private double scorePercentage;
 	/**
+	 * @return the iD
+	 */
+	public int getID() {
+		return ID;
+	}
+	/**
+	 * @param iD the iD to set
+	 */
+	public void setID(int iD) {
+		ID = iD;
+	}
+	/**
 	 * @return the levelName
 	 */
 	public String getLevelName() {

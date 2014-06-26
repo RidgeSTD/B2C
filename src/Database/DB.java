@@ -1058,11 +1058,22 @@ public class DB {
 	
 	//update section
 	//includeing UPDATE SQL
+	@Deprecated
+	/**
+	 * 更新管理员密码，不推荐使用
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param username
+	 * @param newAdmin
+	 * @return 0是失败
+	 */
 	public Integer updateNBAdmin(String username,NBAdmin newAdmin){
 		return 0;
 	}
 	public Integer updateNBCategory(Integer categoryID,NBCategory newCategory){
 		return 0;
+		//TODO 最后实现
+	
 	}
 	
 	
@@ -1169,8 +1180,8 @@ public class DB {
 			logger.info("update user success "+newUser);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("update user failed"+newUser);
 		}
 		return 0;
 	}
@@ -1195,8 +1206,8 @@ public class DB {
 			logger.info("update user success "+newUser);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("update user failed"+newUser);
 		}
 		return 0;
 		
@@ -1220,11 +1231,11 @@ public class DB {
 			p.setString(5, newAddress.getMobilePhone());
 			p.setInt(6, oldaddress.getUserAddressID());
 			p.execute();
-			logger.info("update address success "+newAddress);
+			logger.info("update address success "+oldaddress+" new address"+newAddress);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("update useraddress failed old address:"+oldaddress+" new address"+newAddress);
 		}
 		return 0;
 	}
@@ -1250,8 +1261,9 @@ public class DB {
 			logger.info("update address success "+newAddress);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+			logger.severe("update address failed"+newAddress);
 		}
 		return 0;
 	}
@@ -1263,6 +1275,20 @@ public class DB {
 	 * @return 成功1 失败0
 	 */
 	public Integer updateNBVIPCategoryByID(Integer categoryID,NBVIPCategory newVipCategory){
+		try {
+			PreparedStatement p =connection.prepareStatement("update nbvipcategory set levelname=? ,leastscore=? ,scorepercentage=? where id=?");
+			p.setString(1, newVipCategory.getLevelName());
+			p.setInt(2, newVipCategory.getLeastScore());
+			p.setDouble(3, newVipCategory.getScorePercentage());
+			p.setInt(4, categoryID);
+			
+			p.execute();
+			logger.info("update nbvipcategory success"+newVipCategory);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("nbvipcategory update失败"+newVipCategory);
+		}
 		return 0;
 	}
 	
@@ -1273,6 +1299,20 @@ public class DB {
 	 * @return 成功1 失败0
 	 */
 	public Integer updateNBVIPCategoryByName(String categoryName,NBVIPCategory newVipCategory){
+		try {
+			PreparedStatement p =connection.prepareStatement("update nbvipcategory set levelname=? ,leastscore=? ,scorepercentage=? where levelname=?");
+			p.setString(1, newVipCategory.getLevelName());
+			p.setInt(2, newVipCategory.getLeastScore());
+			p.setDouble(3, newVipCategory.getScorePercentage());
+			p.setString(4, categoryName);
+			
+			p.execute();
+			logger.info("update nbvipcategory success"+newVipCategory);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("nbvipcategory update失败"+newVipCategory);
+		}
 		return 0;
 	}
 	
@@ -1280,15 +1320,53 @@ public class DB {
 	
 	// delete section
 	
-	
+	/**
+	 * 删除管理员
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param admin
+	 * @return
+	 */
+	@Deprecated
 	public Integer deleteNBAdmin(NBAdmin admin){
 		return 0;
 	}
 
+	/**
+	 * 删除类别
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param c
+	 * @return
+	 */
+	@Deprecated
 	public Integer deleteNBCategory(NBCategory c){
 		return 0;
 	}
+	
+	/**
+	 * 删除订单 级联删除相对应 的info信息
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param order 要删除的订单
+	 * @return 是否成功
+	 */
 	public Integer deleteNBOrder(NBOrder order){
+		try {
+			ArrayList<NBOrderInfo> infos=getNBOrderInfosByNBOrderID(order.getOrderID());
+			for(NBOrderInfo i:infos){
+				deleteNBOrderInfo(i);
+				logger.info("delete orderinfo"+i);
+			}
+			PreparedStatement p =connection.prepareStatement("delete from  nbvipcategory where orderid=?");
+			p.setInt(1, order.getOrderID());
+			p.execute();
+			logger.info("delete order success");
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("delete order失败");
+		}
 		return 0;
 	}
 	/**
@@ -1314,13 +1392,60 @@ public class DB {
 		}
 		return null;
 	}
+	
+	/**
+	 * 删除产品
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param product
+	 * @return
+	 */
 	public Integer deleteNBProduct(NBProduct product){
+		try {
+			PreparedStatement p =connection.prepareStatement("delete from  nbproduct where id=?");
+			p.setInt(1, product.getId());
+			p.execute();
+			logger.info("delete product success");
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("delete product失败");
+		}
 		return 0;
 	}
+	
+	/**
+	 * 删除评论
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param comment
+	 * @return
+	 */
+	@Deprecated
 	public Integer deleteNBProductComment(NBProductComment comment){
 		return 0;
 	}
+	
+	/**
+	 * 删除用户
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param user
+	 * @return
+	 */
+	@Deprecated
 	public Integer deleteNBUser(NBUser user){
+		try {
+			
+			PreparedStatement p =connection.prepareStatement("delete from  NBUser where id=?");
+			p.setInt(1, user.getId());
+			p.execute();
+			logger.info("delete user success");
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("delete user失败");
+		}
 		return 0;
 	}
 	/**
@@ -1369,7 +1494,28 @@ public class DB {
 		}
 		return 0;
 	}
+	
+	/**
+	 * 删除会员级别
+	 * @author 赵国铨
+	 * 2014年6月26日
+	 * @param vipCategory
+	 * @return
+	 */
+	@Deprecated
 	public Integer deleteNBVIPCategory(NBVIPCategory vipCategory){
+		try {
+			PreparedStatement p=connection.prepareStatement("delete from nbvipcategory where id=?");
+			
+			p.setInt(1,vipCategory.getID());
+		
+			p.execute();
+			logger.info("delete vipCate success"+vipCategory);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("delete this vipcate failed "+vipCategory);
+		}
 		return 0;
 	}
 }
