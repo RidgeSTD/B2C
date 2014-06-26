@@ -80,5 +80,13 @@ public class NBOrderWrap {
 		this.user=db.getNBUserByID(order.getUserID());
 		this.address=db.getNBUserAddressByID(order.getUserAddressID());
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NBOrderWrap [order=" + order + ", orderInfo=" + orderInfo
+				+ ", user=" + user + ", address=" + address + "]";
+	}
 	
 }
