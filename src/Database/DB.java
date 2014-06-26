@@ -413,8 +413,7 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
-						rs.getInt(4), rs.getInt(5), rs.getInt(6),
-						rs.getDouble(7));
+						rs.getInt(4), rs.getInt(5), rs.getInt(6));
 
 				logger.info("order selected " + tempOrder);
 				return tempOrder;
@@ -548,8 +547,7 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
-						rs.getInt(4), rs.getInt(5), rs.getInt(6),
-						rs.getDouble(7));
+						rs.getInt(4), rs.getInt(5), rs.getInt(6));
 				list.add(tempOrder);
 				logger.info("order add " + tempOrder);
 			}
@@ -579,8 +577,8 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
-						rs.getInt(4), rs.getInt(5), rs.getInt(6),
-						rs.getDouble(7));
+						rs.getInt(4), rs.getInt(5), rs.getInt(6)
+						);
 				orders.add(tempOrder);
 				logger.info("order selected " + tempOrder);
 			}
@@ -618,8 +616,8 @@ public class DB {
 			while (rs.next()) {
 				NBOrder tempOrder = new NBOrder(rs.getInt(1), rs.getInt(2),
 						new java.util.Date(rs.getDate(3).getTime()),
-						rs.getInt(4), rs.getInt(5), rs.getInt(6),
-						rs.getDouble(7));
+						rs.getInt(4), rs.getInt(5), rs.getInt(6)
+						);
 				if (tempOrder.getOrderDate().after(startDate)
 						&& tempOrder.getOrderDate().before(endDate))
 					;
@@ -806,7 +804,7 @@ public class DB {
 		PreparedStatement p;
 		try {
 			NBCategory c = getNBCategoryByName(name);
-
+//			logger.severe("zgq:"+c);
 			p = connection
 					.prepareStatement("select * from nbproduct where id=?");
 			p.setInt(1, c.getID());
@@ -842,7 +840,7 @@ public class DB {
 		ArrayList<NBProduct> product = new ArrayList<NBProduct>(100);
 		try {
 			PreparedStatement p = connection
-					.prepareStatement("select * from nbproduct where name like '%?%'");
+					.prepareStatement("select * from nbproduct where name like ?");
 
 			p.setString(1, name);
 			ResultSet rs = p.executeQuery();
@@ -1040,7 +1038,7 @@ public class DB {
 		PreparedStatement p;
 		try {
 			// p=connection.prepareStatement("select * from nbvipcategory where ")
-			p = connection.prepareStatement("select * from nbuser where"
+			p = connection.prepareStatement("select * from nbuser where "
 					+ "id=?");
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
