@@ -1322,7 +1322,7 @@ public class DB {
 					"insert into nborderinfo values(?,?,?)");
 			p.setInt(1, orderInfo.getOrderID());
 			p.setInt(2, orderInfo.getProductID());
-			p.setInt(4, orderInfo.getNumber());
+			p.setInt(3, orderInfo.getNumber());
 			p.execute();
 
 			logger.info(" orderinfo inserted:" + orderInfo);
@@ -1440,7 +1440,7 @@ public class DB {
 	public NBUserAddress insertNBUserAddress(NBUserAddress address) {
 		try {
 			PreparedStatement p = connection.prepareStatement(
-					"insert into nbuserAddress values" + "(null,?,?,?,?,?,1)",
+					"insert into nbuserAddress values" + "(null,?,?,?,?,?,?,1)",
 					Statement.RETURN_GENERATED_KEYS);
 			p.setInt(1, address.getUserID());
 			p.setString(2, address.getReceiverName());
