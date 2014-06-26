@@ -13,11 +13,11 @@
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg" id="ico_site"/>
-				网站路径：<a href="home.html">首页</a>&gt;&gt;<a href="send_notes.html">送货说明</a>
+				网站路径：<a href="home.jsp">首页</a>&gt;&gt;<a href="send_notes.jsp">送货说明</a>
 			</div>
 			<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">

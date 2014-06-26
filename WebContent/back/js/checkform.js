@@ -17,7 +17,7 @@ window.alert("请输入商品折扣！");
 document.form1.discount.focus();
 return false;
 }else{
-window.location.href="item_list.html";
+window.location.href="item_list.jsp";
 } 
 }
 
@@ -35,7 +35,7 @@ window.alert("请再次输入密码！");
 document.form1.passwordConfirm.focus();
 return false;
 }else{
-window.location.href="home.html";
+window.location.href="home.jsp";
 } 
 }
 
@@ -45,7 +45,7 @@ window.alert("请输入目录名称！");
 document.form1.name.focus();
 return false;
 }else{
-window.location.href="category_list.html";
+window.location.href="category_list.jsp";
 } 
 
 }
@@ -56,7 +56,7 @@ window.alert("请输入库存量！");
 document.form1.storage.focus();
 return false;
 }else{
-window.location.href="storage_list.html";
+window.location.href="storage_list.jsp";
 } 
 
 }
@@ -71,7 +71,7 @@ window.alert("请输入库存量！");
 document.form1.discount.focus();
 return false;
 }else{
-window.location.href="price_list.html";
+window.location.href="price_list.jsp";
 } 
 
 }
@@ -86,7 +86,7 @@ window.alert("请输入密码！");
 document.form1.password.focus();
 return false;
 }else{
-window.location.href="category_list.html";
+window.location.href="category_list.jsp";
 } 
 
 }
@@ -102,13 +102,13 @@ window.alert("请输入积分比例！");
 document.form1.ratio.focus();
 return false;
 }else{
-window.location.href="user_admin.html";
+window.location.href="user_admin.jsp";
 } 
 }
 
 function checkordercheck(){
 	window.alert("审核成功！");
-	window.location.href="order_list_refresh.html";		
+	window.location.href="order_list_refresh.jsp";		
 }
 
 function checkorderselect(){
@@ -121,7 +121,7 @@ if(k===0){
 window.alert("请选择要审核的订单！");
 return false;
 }else{
-window.location.href="order_check.html";
+window.location.href="order_check.jsp";
 } 
 
 }
@@ -144,7 +144,7 @@ window.alert("请输入商品折扣！");
 document.form1.discount.focus();
 return false;
 }else{
-window.location.href="item_list_refresh.html";
+window.location.href="item_list_refresh.jsp";
 } 
 	
 }

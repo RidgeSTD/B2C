@@ -22,9 +22,9 @@ charset = gb2312" pageEncoding = "UTF-8" %>
 		<ul>
 			<li><a href="home.jsp">首页</a></li>
 			<li><a href="category_list.jsp">商品管理</a></li>
-			<li><a href="order_admin.html">订单管理</a></li>
-			<li><a href="salesdata_admin.html">销售量统计</a></li>
-			<li><a href="user_admin.html">会员管理</a></li>
+			<li><a href="order_admin.jsp">订单管理</a></li>
+			<li><a href="salesdata_admin.jsp">销售量统计</a></li>
+			<li><a href="user_admin.jsp">会员管理</a></li>
 			<li><a href="" class="nouseful">&nbsp;</a></li>
 			<li><a href="" class="nouseful">&nbsp;</a></li>
 			<li><a href="" class="nouseful">&nbsp;</a></li>

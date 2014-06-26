@@ -37,11 +37,11 @@ public class RegisterAction extends HttpServlet {
 		NBUser user = new NBUser(1,userEmail,userNickName,userPassword,0,new Time(System.currentTimeMillis()),null);
 		if(DB.getInstance().insertNBUser(user)!=null)
 		{
-			response.sendRedirect("/B2C/web/html/login.html");
+			response.sendRedirect("/B2C/web/html/login.jsp");
 		}
 		else
 		{
-			response.sendRedirect("/B2C/web/html/register.html");
+			response.sendRedirect("/B2C/web/html/register.jsp");
 		}
 	}
 

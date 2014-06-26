@@ -84,7 +84,7 @@ charset = gb2312" pageEncoding = "UTF-8"%>
 			 	  <td>
 				 <input type="button" name="button2" value="提交" onClick="checkitemform()">
 				 	<input type="reset" name="button1" value="重填" onClick="clear()">
-				 <input type="button" name="button22" value="返回" onClick="javascript:window.location.href='item_list.html'">				  </td> 
+				 <input type="button" name="button22" value="返回" onClick="javascript:window.location.href='item_list.jsp'">				  </td> 
 				  <td></td>
 				  </tr>
         </table>

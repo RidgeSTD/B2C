@@ -37,6 +37,7 @@ public class DB {
 	private Connection connection;
 	// private PreparedStatement preparedStatement;
 	private Logger logger;
+
 	private DB() {
 		try {
 			logger = Logger.getLogger("DBLogger");
@@ -269,7 +270,7 @@ public class DB {
 			logger.info("delete address success " + address);
 			return 1;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.severe("delete user address failed");
 			e.printStackTrace();
 		}
 		return 0;
@@ -300,16 +301,68 @@ public class DB {
 		return 0;
 	}
 
-	//TODO get category by name id
-	
 	/**
-	 * 得到全部Category，每个category的父category的位置是这个返回值的ArrayList的对应的位置
-	 * 比如教材的父亲id是1，那么getNBCategory.get
+	 * 通过id得到Category对象
 	 * 
 	 * @author 赵国铨 2014年6月26日
+	 * @param id
 	 * @return
 	 */
-	public ArrayList<NBCategory> getNBCategorys() {
+	public NBCategory getNBCategoryByID(int id) {
+		try {
+			PreparedStatement p = connection
+					.prepareStatement("select * from NBCategory where id=?;");
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				NBCategory tempCateory = new NBCategory(rs.getInt(1),
+						rs.getString(2), rs.getInt(3), rs.getString(4),
+						rs.getString(5));
+				return tempCateory;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("get cate falied" + id);
+		}
+		return null;
+
+	}
+
+	/**
+	 * 通过name得到Category对象
+	 * 
+	 * @author 赵国铨 2014年6月26日
+	 * @param name
+	 * @return
+	 */
+	public NBCategory getNBCategoryByName(String name) {
+		try {
+			PreparedStatement p = connection
+					.prepareStatement("select * from NBCategory where name=?;");
+			p.setString(1, name);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				NBCategory tempCateory = new NBCategory(rs.getInt(1),
+						rs.getString(2), rs.getInt(3), rs.getString(4),
+						rs.getString(5));
+				return tempCateory;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("get cate falied" + name);
+		}
+		return null;
+
+	}
+
+	/**
+	 * 得到全部Category，每个category的父category的位置是这个返回值的ArrayList的对应的位置
+	 * 比如教材的id是j，父亲ID是i，那么这个数组第j个位置的值是i
+	 * 
+	 * @author 赵国铨 2014年6月26日
+	 * @return int数组表示的一个树
+	 */
+	public int[] getNBCategorys() {
 		ArrayList<NBCategory> list = new ArrayList<NBCategory>(100);
 		try {
 			PreparedStatement p = connection
@@ -325,14 +378,21 @@ public class DB {
 						.getID();
 
 			}
-			for (NBCategory temp : list) {
-				// TODO
+			int[] anslist = new int[maxID + 1];
+			for (int a : anslist) {
+				a = -1;
 			}
+			for (NBCategory temp : list) {
+
+				// ansList.add(temp.getID(), temp.getFatherID());
+				anslist[temp.getID()] = temp.getFatherID();
+			}
+			return anslist;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.severe("get category tree failed");
 		}
-		return list;
+		return null;
 
 	}
 
@@ -727,7 +787,6 @@ public class DB {
 			return product;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.severe("get all product failed");
 		}
@@ -735,10 +794,41 @@ public class DB {
 
 	}
 
-//	public ArrayList<NBProduct> getNBProductsByCategory(NBCategory name) {
-//		// TODO
-//
-//	}
+	/**
+	 * 通过Category的名称得到NBProduct
+	 * 
+	 * @author 赵国铨 2014年6月26日
+	 * @param name
+	 * @return
+	 */
+	public ArrayList<NBProduct> getNBProductsByCategoryName(String name) {
+		ArrayList<NBProduct> product = new ArrayList<NBProduct>(100);
+		PreparedStatement p;
+		try {
+			NBCategory c = getNBCategoryByName(name);
+
+			p = connection
+					.prepareStatement("select * from nbproduct where id=?");
+			p.setInt(1, c.getID());
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				NBProduct temp = new NBProduct(rs.getInt(1), rs.getInt(2),
+						rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getDouble(6), rs.getDouble(7), rs.getInt(8));
+				product.add(temp);
+				logger.info("get an nbproduct :" + temp);
+
+			}
+			logger.info("get product by category name success");
+			return product;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("get  product by category name failed");
+		}
+		return null;
+
+	}
 
 	/**
 	 * 商品搜索功能，提供like级别的查询服务
@@ -919,8 +1009,7 @@ public class DB {
 		PreparedStatement p;
 		try {
 			// p=connection.prepareStatement("select * from nbvipcategory where ")
-			p = connection.prepareStatement("select * from nbuser where"
-					+ "email=?");
+			p = connection.prepareStatement("select * from nbuser where email=?");
 			p.setString(1, email);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -1123,7 +1212,7 @@ public class DB {
 
 	@Deprecated
 	/**
-	 * 插入管理员
+	 * 插入管理员 返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * @author 赵国铨
 	 * 2014年6月26日
 	 * @param admin
@@ -1147,76 +1236,92 @@ public class DB {
 	}
 
 	/**
-	 * 插入类别
+	 * 插入类别返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param c
 	 * @return 1成功 0失败
 	 */
-	public Integer insertNBCategory(NBCategory c) {
+	public NBCategory insertNBCategory(NBCategory c) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into NBcategory values(null,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into NBcategory values(null,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setString(1, c.getName());
 			p.setInt(2, c.getFatherID());
 			p.setString(3, c.getDescription());
 			p.setString(4, c.getImagePath());
 			p.execute();
 			logger.severe("插入category成功" + c);
-			return 1;
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+				c.setID(rs.getInt(1));
+				return c;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.severe("插入category失败" + c);
-			return 0;
 		}
+		return null;
+
 	}
 
 	/**
-	 * 插入order
+	 * 插入order返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param order
 	 * @return
 	 */
-//	public Integer insertNBOrder(NBOrder order) {
-//		try {
-//			PreparedStatement p = connection
-//					.prepareStatement("insert into NBOrder values(null,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-//			p.setInt(1, order.getUserID());
-//			p.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
-//			p.setInt(3, order.getState());
-//			p.setInt(4, order.getScoreGet());
-//			p.setInt(5, order.getUserAddressID());
-//			p.execute();
-//			logger.info("插入order成功" + order);
-//			
-//			return p.getGeneratedKeys();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			logger.severe("插入order失败" + order);
-//			return 0;
-//		}
-//	}
+	public NBOrder insertNBOrder(NBOrder order) {
+		try {
+			PreparedStatement p = connection.prepareStatement(
+					"insert into NBOrder values(null,?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			p.setInt(1, order.getUserID());
+			p.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
+			p.setInt(3, order.getState());
+			p.setInt(4, order.getScoreGet());
+			p.setInt(5, order.getUserAddressID());
+			p.execute();
+			logger.info("插入order成功" + order);
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+				order.setOrderID(rs.getInt(1));
+				return order;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.severe("插入order失败" + order);
+
+		}
+		return null;
+	}
 
 	/**
-	 * 插入orderInfo
+	 * 插入orderInfo返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月25日
 	 * @param orderInfo
 	 *            要插入的对象
 	 * @return
 	 */
-	public Integer insertNBOrderInfo(NBOrderInfo orderInfo) {
+	public NBOrderInfo insertNBOrderInfo(NBOrderInfo orderInfo) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into nborderinfo values(?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into nborderinfo values(?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setInt(1, orderInfo.getOrderID());
 			p.setInt(2, orderInfo.getProductID());
 			p.setInt(4, orderInfo.getNumber());
 			p.execute();
 
 			logger.info(" orderinfo inserted:" + orderInfo);
-			return 1;
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+
+				return orderInfo;
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -1226,16 +1331,17 @@ public class DB {
 	}
 
 	/**
-	 * 插入product
+	 * 插入product返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param product
 	 * @return
 	 */
-	public Integer insertNBProduct(NBProduct product) {
+	public NBProduct insertNBProduct(NBProduct product) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into NBproduct values(null,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into NBproduct values(null,?,?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setInt(1, product.getCategoryID());
 			p.setString(2, product.getDescrition());
 			p.setString(3, product.getImagePath());
@@ -1245,7 +1351,11 @@ public class DB {
 			p.execute();
 
 			logger.info(" product inserted:" + product);
-			return 1;
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+				product.setId(rs.getInt(1));
+				return product;
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -1256,16 +1366,17 @@ public class DB {
 	}
 
 	/**
-	 * 插入评论
+	 * 插入评论返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param comment
 	 * @return
 	 */
-	public Integer insertNBProductComment(NBProductComment comment) {
+	public NBProductComment insertNBProductComment(NBProductComment comment) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into nbproductcomment values(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into nbproductcomment values(?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setInt(1, comment.getUserID());
 			p.setInt(2, comment.getProductID());
 			p.setInt(3, comment.getLevel());
@@ -1273,7 +1384,7 @@ public class DB {
 			p.setString(5, comment.getContent());
 			p.execute();
 			logger.info(" productcomment inserted:" + comment);
-			return 1;
+			return comment;
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -1283,17 +1394,17 @@ public class DB {
 	}
 
 	/**
-	 * 插入用户
+	 * 插入用户返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param user
 	 * @return
 	 */
-	public Integer insertNBUser(NBUser user) {
+	public NBUser insertNBUser(NBUser user) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into NBUser values"
-							+ "(null,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into NBUser values" + "(null,?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setString(1, user.getEmail());
 			p.setString(2, user.getNickname());
 			p.setString(3, user.getPassword());
@@ -1301,27 +1412,31 @@ public class DB {
 			p.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
 			p.execute();
 			logger.info("insert user success" + user);
-			return 1;
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+				user.setId(rs.getInt(1));
+				return user;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.severe("insert user faild" + user);
 		}
-		return 0;
+		return null;
 	}
 
 	/**
-	 * 插入用户地址
+	 * 插入用户地址返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月25日
 	 * @param address
 	 *            NBUserAddress对象 useraddressID ,isactive无需提供，任意值即可
-	 * @return 1,0
+	 * @return 主键或null
 	 */
-	public Integer insertNBUserAddress(NBUserAddress address) {
+	public NBUserAddress insertNBUserAddress(NBUserAddress address) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into nbuserAddress values"
-							+ "(null,?,?,?,?,?,1)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into nbuserAddress values" + "(null,?,?,?,?,?,1)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setInt(1, address.getUserID());
 			p.setString(2, address.getReceiverName());
 			p.setString(3, address.getAddress());
@@ -1331,37 +1446,45 @@ public class DB {
 			// is active
 			p.execute();
 			logger.info("insert useraddress success" + address.toString());
-			return 1;
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+				address.setUserAddressID(rs.getInt(1));
+				return address;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.severe("useraddress 插入失败" + address);
 		}
-		return 0;
+		return null;
 	}
 
 	/**
-	 * 插入用户会员级别
+	 * 插入用户会员级别返回id设置好的对象，需要把传入的对象赋值成该函数的返回值
 	 * 
 	 * @author 赵国铨 2014年6月26日
 	 * @param vipCategory
 	 * @return
 	 */
-	public Integer insertNBVIPCategory(NBVIPCategory vipCategory) {
+	public NBVIPCategory insertNBVIPCategory(NBVIPCategory vipCategory) {
 		try {
-			PreparedStatement p = connection
-					.prepareStatement("insert into nbvipcategory values"
-							+ "(null,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement p = connection.prepareStatement(
+					"insert into nbvipcategory values" + "(null,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			p.setString(1, vipCategory.getLevelName());
 			p.setInt(2, vipCategory.getLeastScore());
 			p.setDouble(3, vipCategory.getScorePercentage());
 			p.execute();
 			logger.info("insert nbvipcategory success" + vipCategory);
-			return 1;
+			ResultSet rs = p.getGeneratedKeys();
+			while (rs.next()) {
+				vipCategory.setID(rs.getInt(1));
+				return vipCategory;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.severe("nbvipcategory 插入失败" + vipCategory);
 		}
-		return 0;
+		return null;
 	}
 
 	// update section
@@ -1380,8 +1503,21 @@ public class DB {
 	}
 
 	public Integer updateNBCategory(Integer categoryID, NBCategory newCategory) {
-		return 0;
-		// TODO 最后实现
+		try {
+			PreparedStatement p=connection.prepareStatement("update nbCategory set name=?,fatherid=?,description=?,imagePath=? where id=?");
+			p.setString(1, newCategory.getName());
+			p.setInt(2, newCategory.getFatherID());
+			p.setString(3, newCategory.getDescription());
+			p.setString(4, newCategory.getImagePath());
+			p.execute();
+			return 1;
+			
+		} catch (SQLException e) {
+			logger.severe("update NBCategory failed");
+			e.printStackTrace();
+		}
+		return null;
+		
 
 	}
 

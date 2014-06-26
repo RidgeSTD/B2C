@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page pageEncoding = "UTF-8"%>
+<%@ page pageEncoding = "UTF-8" import="Database.*, model.*, java.util.*"%>
 <html>
 <head>
 <title>BC2商城</title>
@@ -11,15 +11,20 @@
 <body>
 <%@ include file="header.jsp" %>
 	<div id="banner"></div>
+	<%
+	DB db = DB.getInstance();
+	ArrayList<NBProduct> cart = (ArrayList<NBProduct>)session.getAttribute("cart");
+	double sumprice = 0, totalprice = 0;
+	%>
 	<div id="main">
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
-				网站路径：<a href="cart_list.html">购物车</a>&gt;&gt;<a href="#"><span class="red">确认订单</span></a>
+				网站路径：<a href="cart_list.jsp">购物车</a>&gt;&gt;<a href="#"><span class="red">确认订单</span></a>
 			</div>
 			<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">
@@ -32,7 +37,7 @@
 		  </div>
 		</div>
 		<div id="double1">
-			<div id="doublehead1"><strong>商品清单</strong>&nbsp;<a href="cart_list_edit.html"><img src="../image/edit.gif" alt="修改" class="picture"></a></div>
+			<div id="doublehead1"><strong>商品清单</strong>&nbsp;<a href="cart_list_edit.jsp"><img src="../image/edit.gif" alt="修改" class="picture"></a></div>
 			<div id="doublecontent1">
 			<form action="" method="post" enctype="multipart/form-data" name="form1">
 				<table id="doublecontenttable1">
@@ -45,68 +50,39 @@
 						<th>您的价格</th>
 						<th>数量</th>
 					</tr>
+					
 				</thead>
 				<tbody>
+				<%for (int i = 0;i<cart.size();i++){
+					int zhe = (int)(cart.get(i).getPrice()*100);
+					double yourprice = cart.get(i).getPrice()* cart.get(i).getDiscount();
+					sumprice += yourprice;
+				%>
 				  <tr>
-					<td>
-						<span>1</span>
-					</td>		
-					<td>
-					<a href="item_info.html">大学物理学.第四册：波动与光学（第2版）</a></td>
-					<td>
-					￥10.00
-					</td>
-					<td>
-					85折
-					</td>
-					<td>
-					￥8.50
-					</td>
-					<td>
-					1
-					</td>	
+					<td><span>1</span></td>		
+					<td><%=cart.get(i).getName() %></a></td>
+					<td>￥<%=String.format("%.2f", cart.get(i).getPrice()) %></td>
+					<td><%=zhe %>折</td>
+					<td>￥<%=String.format("%.2f", yourprice) %></td>
+					<td>1</td>	
           		  </tr>
-				  <tr>
-					<td>
-					<span>2</span>
-					</td>
-					<td>
-						<a href="">大学物理学.第一册：力学（第2版）</a></td>
-					<td>
-					￥16.00
-					</td>
-					<td>
-					85折
-					</td>
-					<td>
-					￥13.60
-					</td>
-					<td>
-					1
-					</td>	
-				  </tr>
+          		  <%} %>
 				  <tr></tr>
 				  <tr>
 				  	<td>
 						总价
 					</td>
 					<td>
-						<span class="red">商品价格:￥22.10 + 送货费:￥5.00 = ￥25.10</span>
+						<span class="red">商品价格:￥<%=String.format("%.2f", sumprice) %> + 送货费:￥5.00 = ￥<%=String.format("%.2f", sumprice+5) %></span>
 					</td>
-					<td>
-						使用积分:
-					</td>
-					<td>
-						<input type="text" name="credit" onFocus="nextfield='sex'" value="" maxlength="25" class="smallinputext"> 
-					</td>
-					<td>
-            <input type="button" class="bt2" name="button2" value="确定" onClick="checkcredit()">
-				  </td>
-				  <td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				  	<td></td>
 				  </tr>
 				  <tr>
 				  <td>本单将产生积分：</td>
-				  <td><span class="red">22</span></td>
+				  <td><span class="red"><%=String.format("%.0f",sumprice+5) %></span></td>
 				  <td></td>
 				  <td></td>
 				  <td></td>
@@ -116,22 +92,22 @@
 			</div>
 			</div>
 			<div id="double2">
-			<div id="doublehead2"><strong>送货地址</strong>&nbsp;<a href="address.html"><img src="../image/edit.gif" alt="修改" class="picture"></a></div>
+			<div id="doublehead2"><strong>送货地址</strong>&nbsp;<a href="address.jsp"><img src="../image/edit.gif" alt="修改" class="picture"></a></div>
 			<div id="doublecontent2">
 			<table id="itemsearch">
               <tr>
                 <th class="itemsearchth" >姓&nbsp;&nbsp;&nbsp;&nbsp;名：</th>
-                <td class="itemsearchtd1">王小静</td>
+                <td class="itemsearchtd1">华文澜</td>
                 <td class="itemsearchtd2">&nbsp;</td>
               </tr>
               <tr>
                 <th class="itemsearchth">地&nbsp;&nbsp;&nbsp;&nbsp;址：</th>
-                <td class="itemsearchtd1">北京市海淀区翠微路甲5号</td>
+                <td class="itemsearchtd1">哈尔滨南岗区西大直街92号</td>
                 <td class="itemsearchtd2">&nbsp;</td>
               </tr>
               <tr>
                 <th class="itemsearchth">电话号码：</th>
-                <td class="itemsearchtd1">13812345678</td>
+                <td class="itemsearchtd1">13912345678</td>
                 <td class="itemsearchtd2"></td>
               </tr>
               <tr>
@@ -143,7 +119,7 @@
                 <th class="itemsearchth">&nbsp;</th>
                 <td class="itemsearchtd1">&nbsp;</td>
                 <td class="itemsearchtd2">请仔细核查信息，确定无误后：
-                  <input type="button" name="Submit" value="提交订单" onclick="javascript:window.location.href='order_success.html'" /></td>
+                  <input type="button" name="Submit" value="提交订单" onclick="javascript:window.location.href='/B2C/servlet/MakeOrder'" /></td>
               </tr>
             </table>
 			</form>		

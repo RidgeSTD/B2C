@@ -12,28 +12,7 @@
 <script language="javascript" src="../js/checkform.js">
 </script>
 <body>
-<div id="container">
-	<div id="logalleft">
-		<div id="logalright">
-		<a href="register.jsp" target="_parent">[注册&nbsp;</a>] | 
-		<a href="" target="_parent">王小静 已登录| 
-		<a href="user_edit.jsp" target="_parent">个人信息维护</a> | 
-		<a href="address_daohang.jsp" target="_parent">地址簿</a> |
-	 	<a href="home_nologin.jsp" target="_parent">退出</a>
-		</div>
-	</div>
-	<div id="globallink">
-		<ul>
-			<li><a href="home.jsp">首页</a></li>
-			<li><a href="credit_query.jsp">积分查询</a></li>
-			<li><a href="item_search.jsp">商品搜索</a></li>
-			<li><a href="favorite.jsp" >收藏夹</a></li>
-			<li><a href="cart_list.jsp">我的购物车</a></li>
-			<li><a href="tradequery.jsp">交易查询</a></li>
-			<li><a href="send_notes.jsp">送货说明</a></li>
-			<li><a href="" class="nouseful">&nbsp;</a></li>
-		</ul>
-	</div>
+<%@ include file="header.jsp" %>
 	<div id="banner"></div>
 	<div id="main">
 		<div id="search2">

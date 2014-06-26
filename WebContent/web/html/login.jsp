@@ -14,11 +14,11 @@
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
-				网站路径：<a href="home.html">首页</a>&gt;&gt;<a href=""> 会员登录</a>
+				网站路径：<a href="home.jsp">首页</a>&gt;&gt;<a href=""> 会员登录</a>
 			</div>
 						<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">
@@ -49,7 +49,7 @@
             		<td class="itemsearchtd1">
 					<input type="password" class="inputtext" name="password" onFocus="nextfield='name'" value="" maxlength="25">
 					</td>
-					<td class="itemsearchtd2"><a href="pwd_find.html"><span class="red">忘记密码？</span></a></td>
+					<td class="itemsearchtd2"><a href="pwd_find.jsp"><span class="red">忘记密码？</span></a></td>
           		 </tr>
 				
 				 <tr>

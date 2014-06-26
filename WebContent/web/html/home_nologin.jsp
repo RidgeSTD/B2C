@@ -13,7 +13,7 @@
 		<div id="category">
 			<h4><span>图书音像</span></h4>
 			<ul>
-				<li><a href="item_list.html">教材</a></li>
+				<li><a href="item_list.jsp">教材</a></li>
 				<li><a href="#">外语</a></li>
 				<li><a href="#">公务员考试</a></li>
 				<li><a href="#">音乐</a></li>
@@ -52,7 +52,7 @@
 		<div id="search1">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
-				网站路径：<a href="home.html">首页</a>
+				网站路径：<a href="home.jsp">首页</a>
 			</div>
 			<div id="searchright">
 			  <select name="category" id="searchrightcategory">
@@ -63,7 +63,7 @@
                 <option value="4">数码产品</option>
               </select>
 			  <input type="text" name="product" id="textInput" />
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 				
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 		
 			<div id="recommend">
 			<ul>
-				<li><a href="item_info.html"><img src="../image/dxwl4.jpg"><br><span class="inputHeader">大学物理学.第四册：<br>波动与光学(第2版)<br>
+				<li><a href="item_info.jsp"><img src="../image/dxwl4.jpg"><br><span class="inputHeader">大学物理学.第四册：<br>波动与光学(第2版)<br>
 	     <strong>￥8.50</strong> 85折</span></li>
 		 		<li><a href="#"><img src="../image/wj.jpg"><br><span class="inputHeader">美瑞贝尔皇冠★最新<br>韩版丝麻质感围巾<br>
 	     <strong>￥33.00</strong> 75折</span></li>

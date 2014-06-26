@@ -14,11 +14,11 @@
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
-				网站路径：<a href="home.html">首页</a>&gt;&gt;<a href="">新用户注册</strong></a>
+				网站路径：<a href="home.jsp">首页</a>&gt;&gt;<a href="">新用户注册</strong></a>
 			</div>
 			<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">
@@ -74,7 +74,7 @@
 				 <th></th>
 				 	<td><input type="submit" class="bt2" name="button2" value="提交" onClick="checkregform()">
 						&nbsp;<input type="reset" class="bt2" name="button1" value="重填" onClick="clear()">
-						&nbsp;<input type="button" class="bt2" name="button3" value="返回" onClick="javascript:window.location.href='home.html'">
+						&nbsp;<input type="button" class="bt2" name="button3" value="返回" onClick="javascript:window.location.href='home.jsp'">
 					</td>
 				 </tr>
         </table>

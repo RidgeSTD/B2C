@@ -78,7 +78,7 @@ public class Trade_Query_serv extends HttpServlet {
 			}
 		}
 		session.setAttribute("orderList_hwl", orderList);
-		response.sendRedirect("/B2C/web/html/order_list.html");
+		response.sendRedirect("/B2C/web/html/order_list.jsp");
 	}
 
 	public void init() throws ServletException {

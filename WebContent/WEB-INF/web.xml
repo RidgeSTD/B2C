@@ -21,6 +21,11 @@
     <servlet-name>Confirm_serv</servlet-name>
     <servlet-class>edu.winlandiano.Confirm_serv</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>MakeOrder</servlet-name>
+    <servlet-class>edu.winlandiano.MakeOrder</servlet-class>
+  </servlet>
+
 
 
 
@@ -44,8 +49,12 @@
     <servlet-name>Confirm_serv</servlet-name>
     <url-pattern>/servlet/Confirm_serv</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MakeOrder</servlet-name>
+    <url-pattern>/servlet/MakeOrder</url-pattern>
+  </servlet-mapping>
   
     <welcome-file-list>
-        <welcome-file>web/html/home.html</welcome-file>
+        <welcome-file>web/html/home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

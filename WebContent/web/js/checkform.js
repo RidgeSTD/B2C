@@ -30,7 +30,7 @@ document.form1.password.value="";
 document.form1.password.focus();
 return false;
 }else{
-window.location.href="home.html";
+window.location.href="home.jsp";
 }
 }
 
@@ -64,7 +64,7 @@ document.form1.password1.focus();
 return false;
 }
 else{
-window.location.href="order_confirm_new.html";
+window.location.href="order_confirm_new.jsp";
 }
 }
 
@@ -78,7 +78,7 @@ window.alert("请输入密码！");
 document.form1.password.focus();
 return false;
 }else{
-window.location.href="home.html";
+window.location.href="home.jsp";
 } 
 
 }
@@ -93,7 +93,7 @@ window.alert("请输入密码！");
 document.form1.password.focus();
 return false;
 }else{
-window.location.href="order_confirm.html";
+window.location.href="order_confirm.jsp";
 } 
 
 }
@@ -118,7 +118,7 @@ document.form1.phone.focus();
 return false;
 }
 else{
-window.location.href="address.html";
+window.location.href="address.jsp";
 } 
 
 }
@@ -142,7 +142,7 @@ return false;
 document.form1.phone.focus();
 return false;
 }else{
-window.location.href="order_confirm.html";
+window.location.href="order_confirm.jsp";
 } 
 
 }
@@ -158,7 +158,7 @@ if(k===0){
 window.alert("请打分！");
 return false;
 }else{
-window.location.href="item_info.html";
+window.location.href="item_info.jsp";
 } 
 
 }
@@ -175,7 +175,7 @@ return false;
 
 }else{
 window.alert("密码已发送到您的邮箱，请查收！");	
-window.location.href="pwd_find.html";
+window.location.href="pwd_find.jsp";
 	}
 
 }
@@ -194,7 +194,7 @@ window.alert("请再次输入新密码！");
 document.form1.passwordConfirm.focus();
 return false;
 }else{
-window.location.href="home.html";
+window.location.href="home.jsp";
 } 
 }
 
@@ -279,7 +279,7 @@ return false;
 document.form1.phone.focus();
 return false;
 }else{
-window.location.href="address_daohang.html";
+window.location.href="address_daohang.jsp";
 } 
 
 }

@@ -13,11 +13,11 @@
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
-				网站路径：<a href="home.html">首页</a>&gt;&gt;<a href="#">商品详细信息</a>
+				网站路径：<a href="home.jsp">首页</a>&gt;&gt;<a href="#">商品详细信息</a>
 			</div>
 			<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">
@@ -53,7 +53,7 @@
           <td></td>
 		  <td></td>
 		  <td></td>
-		<td><a href="comment_list.htm"><a href="comment_list.html">【查看用户评论】</a><br><a href="comment_add.html">【参与评论】</a></td>
+		<td><a href="comment_list.htm"><a href="comment_list.jsp">【查看用户评论】</a><br><a href="comment_add.jsp">【参与评论】</a></td>
 		</tr>
 				 </tbody>
 		<tfoot>
@@ -65,7 +65,7 @@
 		<span class="inputHeaderGrey">暂无法购买</span>
 		</td>
 		  <td>
-		<a href="favorite.html"><img src="../image/put_to_collection.gif" alt="收藏" class="picture"></a>
+		<a href="favorite.jsp"><img src="../image/put_to_collection.gif" alt="收藏" class="picture"></a>
 			</td>
 		</tr>
 		</tfoot>

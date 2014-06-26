@@ -14,22 +14,22 @@
 <div id="container">
 	<div id="logalleft">
 		<div id="logalright">
-		<a href="register.html" target="_parent">[注册&nbsp;</a>] | 
+		<a href="register.jsp" target="_parent">[注册&nbsp;</a>] | 
 		<a href="" target="_parent">王小静 已登录| 
-		<a href="user_edit.html" target="_parent">个人信息维护</a> | 
-		<a href="address_daohang.html"" target="_parent">地址簿</a> |
-	 	<a href="home_nologin.html" target="_parent">退出</a>
+		<a href="user_edit.jsp" target="_parent">个人信息维护</a> | 
+		<a href="address_daohang.jsp"" target="_parent">地址簿</a> |
+	 	<a href="home_nologin.jsp" target="_parent">退出</a>
 		</div>
 	</div>
 	<div id="globallink">
 		<ul>
-			<li><a href="home.html">首页</a></li>
-			<li><a href="credit_query.html">积分查询</a></li>
-			<li><a href="item_search.html">商品搜索</a></li>
-			<li><a href="favorite.html">收藏夹</a></li>
-			<li><a href="cart_list.html">我的购物车</a></li>
-			<li><a href="tradequery.html">交易查询</a></li>
-			<li><a href="send_notes.html">送货说明</a></li>
+			<li><a href="home.jsp">首页</a></li>
+			<li><a href="credit_query.jsp">积分查询</a></li>
+			<li><a href="item_search.jsp">商品搜索</a></li>
+			<li><a href="favorite.jsp">收藏夹</a></li>
+			<li><a href="cart_list.jsp">我的购物车</a></li>
+			<li><a href="tradequery.jsp">交易查询</a></li>
+			<li><a href="send_notes.jsp">送货说明</a></li>
 			<li><a href="" class="nouseful">&nbsp;</a></li>
 		</ul>
 	</div>
@@ -51,11 +51,11 @@
 		<div id="search2">
 			<div id="searchleft">
 				<img src="../image/ico_site.jpg"  id="ico_site"/>
-				网站路径：<a href="cart_list.html">购物车</a>&gt;&gt;<a href="#">订单详细信息</a>
+				网站路径：<a href="cart_list.jsp">购物车</a>&gt;&gt;<a href="#">订单详细信息</a>
 			</div>
 			<div id="searchright2">
 			  <input type="text" name="product" id="textInput"/>
-			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.html','_parent','')">
+			  <input type="button" name="Submit" value="搜索" id="searchbutton" onClick="javascript:window.open('item_search_list.jsp','_parent','')">
 			</div>
 			<div id="searchright1">
 			  <select name="category" id="searchrightcategory">
@@ -125,7 +125,7 @@
 				<tbody>
 				  <tr>
             		<td>300254</td>
-					<td><a href="item_info.html">大学物理学.第四册：波动与光学（第2版）</a></td>
+					<td><a href="item_info.jsp">大学物理学.第四册：波动与光学（第2版）</a></td>
 					<td>￥10.00</td>
 					<td>85折</td>
 					<td>￥8.50</td>

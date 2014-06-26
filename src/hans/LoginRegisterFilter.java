@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginRegisterFilter
  */
-@WebFilter("/web/html/user_edit.html")
+@WebFilter("/web/html/user_edit.jsp")
 public class LoginRegisterFilter implements Filter {
 
     /**
@@ -51,7 +51,7 @@ public class LoginRegisterFilter implements Filter {
 		{
 			System.out.println("111111111");
             // 跳转到登陆页面
-			httpResponse.sendRedirect("/B2C/web/html/login.html");
+			httpResponse.sendRedirect("/B2C/web/html/login.jsp");
          }
 		else 
 		{
@@ -64,7 +64,7 @@ public class LoginRegisterFilter implements Filter {
 		{
 			System.out.println("111111111");
             // 跳转到登陆页面
-			httpResponse.sendRedirect("/B2C/web/html/login.html");
+			httpResponse.sendRedirect("/B2C/web/html/login.jsp");
          }
 		chain.doFilter(request, response);*/
 	}

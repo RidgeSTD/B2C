@@ -39,7 +39,7 @@ public class LoginAction extends HttpServlet {
 		//if(DB.getInstance().validataUser(userEmail, userPassword)==1)
 		if(userEmail.equals("admin")&&userPassword.equals("admin"))
 		{
-			request.getSession().setAttribute("userEmail",userEmail);
+			request.getSession().setAttribute("userEmail","michael@163.com");//TODO 
 			response.sendRedirect("/B2C/web/html/home.jsp");
 		}
 		else
