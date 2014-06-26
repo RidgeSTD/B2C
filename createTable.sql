@@ -25,3 +25,7 @@ insert into nbcategory values (4,'鲜花速递',4,'该目录下包括鲜花分�
 insert into nbuser values (null,'michael@163.com','菊花','juhuaduoduo',0,'2014-6-26');
 insert into nbuser values (null,'scofiled@163.com','采摘','renjuncaizhai',0,'2014-6-26');
 insert into nbuseraddress values(1,1,'赵国铨','哈工大A02-5049','150000','0451-110','18646083168',1);
+-- 个别数据需求 by Alex Hua
+insert into NBProduct values (1,1,'教你如何3天提升逼格','这是一本非常提升逼格的书，来自5049专供，华大师亲笔题词', '/B2C/web/image/ssbs.jpg',52.5,0.9,3);
+insert into nborderinfo values(1,1,10);
+insert into nborder values(1,1, '2014-06-27',0,10,1)
